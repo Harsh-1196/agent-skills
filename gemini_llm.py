@@ -1,20 +1,132 @@
-import google.generativeai as genai
+# import os
+# from dotenv import load_dotenv
+# import config
+# from google import genai
+
+# # Load environment variables
+# load_dotenv()
+
+# client = genai.Client()
+
+# def chat(messages: str) -> str:
+#     response = client.models.generate_content(
+#         model=config.MODEL_NAME,
+#         contents=messages
+#     )
+#     return response.text
+
+# def chat_stream(messages: str):
+#     response = client.models.generate_content_stream(
+#         model=config.MODEL_NAME,
+#         contents=messages
+#     )
+#     for chunk in response:
+#         if chunk.text:
+#             yield chunk.text
 import os
+import time
 from dotenv import load_dotenv
+from google import genai
 import config
 
 # Load environment variables
 load_dotenv()
 
-#configuring the api
-genai.configure(api_key = os.getenv("GEMINI_API_KEY"))
+# Initialize Gemini client
+client = genai.Client()
 
-#load model
-model = genai.GenerativeModel(config.MODEL_NAME)
+# 🔥 Formatter Prompt (controls output style)
+FORMATTER_PROMPT = """
+You are a response formatter optimized for clean display and streaming.
 
+Your task is to refine raw LLM output while preserving the original intent and structure.
+
+Follow these rules strictly:
+
+1. Clean Unwanted Formatting  
+- Remove markdown and decorative symbols such as *, **, #, -, _, backticks, and bullets.  
+- Do not add headings or special formatting.
+
+2. Preserve Natural Structure  
+- If the response already contains line breaks, spacing, or structure, preserve it.  
+- Do NOT force everything into paragraphs.  
+- Let the format follow the user’s intent and content type.
+
+3. Escape Character Handling (VERY IMPORTANT)  
+- Convert escaped characters into actual formatting:  
+  - "\n" → real line break  
+  - "\t" → proper spacing or indentation  
+- Do not display escape sequences as plain text.
+
+4. Language Refinement  
+- Make the text clear, natural, and readable.  
+- Remove unnecessary repetition or filler words.  
+- Keep it concise but meaningful.
+
+5. Streaming Optimization  
+- Ensure the response flows smoothly when displayed character by character.  
+- Avoid broken or incomplete sentence fragments.
+
+6. Output Rules  
+- Output only the cleaned and formatted response.  
+- Do not include explanations or metadata.  
+- Do not wrap the output in quotes.
+
+Your goal is to produce clean, readable, and properly formatted text that respects the original structure and displays correctly in a streaming UI.
+"""
+
+def build_prompt(user_input: str) -> str:
+    return f"{FORMATTER_PROMPT}\n\nUser Input:\n{user_input}"
+
+
+# =========================
+# ✅ NORMAL RESPONSE
+# =========================
 def chat(messages: str) -> str:
-    response = model.generate_content(messages)
+    prompt = build_prompt(messages)
+
+    response = client.models.generate_content(
+        model=config.MODEL_NAME,
+        contents=prompt
+    )
+
     return response.text
 
 
+# =========================
+# 🔥 TYPEWRITER STREAM
+# =========================
+def chat_stream(messages: str):
+    prompt = build_prompt(messages)
 
+    response = client.models.generate_content_stream(
+        model=config.MODEL_NAME,
+        contents=prompt
+    )
+
+    for chunk in response:
+        if chunk.text:
+            for char in chunk.text:
+                yield char
+
+                # ⏱️ Human-like typing delays
+                if char in ".!?":
+                    time.sleep(0.25)   # sentence pause
+                elif char == ",":
+                    time.sleep(0.1)    # small pause
+                else:
+                    time.sleep(0.015)  # normal typing speed
+
+
+# =========================
+# 🧪 TEST (CLI TYPEWRITER)
+# =========================
+if __name__ == "__main__":
+    user_input = input("You: ")
+
+    print("\nAI: ", end="", flush=True)
+
+    for char in chat_stream(user_input):
+        print(char, end="", flush=True)
+
+    print("\n")

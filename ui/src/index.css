@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-base: #0D0E12;
+  --color-primary-accent: #00F0FF;
+  --color-secondary-accent: #A855F7;
+  --color-text-soft: #D1D5DB;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-primary-base);
+    color: var(--color-text-soft);
+    font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+    overflow: hidden;
+  }
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-accent);
+}
