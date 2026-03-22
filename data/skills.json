@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Explain Radix Sort",
+    "description": "Non-comparative sorting algorithm that sorts integers or strings by grouping elements with the same individual digits or characters into bins",
+    "trigger": "explain radix sort",
+    "instructions": "Iterate by digit place, use stable sub-sort, and repeat until all digit places are processed"
+  },
+  {
+    "name": "Explain Dynamic Programming",
+    "description": "Algorithmic technique for solving complex problems efficiently by breaking them down into smaller, overlapping subproblems",
+    "trigger": "explain dp",
+    "instructions": "Break down into smaller subproblems, solve each subproblem only once, and store its solution"
+  },
+  {
+    "name": "Greet User",
+    "description": "Respond to a greeting with a friendly message",
+    "trigger": "hii, hey",
+    "instructions": "Respond with a friendly message, such as 'Hi there! How can I help you today?' or 'Hey, how's it going? Is there something I can help you with or would you like to chat?'"
+  }
+]
