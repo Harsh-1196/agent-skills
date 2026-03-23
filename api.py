@@ -7,10 +7,10 @@ from pydantic import BaseModel
 import os
 import json
 
-from llm_service import chat_stream
+from llm_service import chat_stream, get_embedding
 from memory.interaction_logger import log_interaction
 from skills.observer import run_observer
-from skills.mongodb_store import candidates_col, promote_to_active
+from skills.mongodb_store import candidates_col, promote_to_active, search_active_skills
 import asyncio
 
 app = FastAPI()
@@ -33,12 +33,64 @@ class PromotionRequest(BaseModel):
     trigger: str
     instructions: str
 
+class SearchRequest(BaseModel):
+    query: str
+
+@app.post("/api/skills/search")
+async def search_skills(request: SearchRequest):
+    """Real-time skill search for typeahead suggestions while typing."""
+    query = request.query.strip()
+    if len(query) < 3:
+        return {"matches": []}
+    
+    try:
+        query_embedding = get_embedding(query)
+        results = await search_active_skills(query_embedding, limit=3)
+        matches = []
+        for r in results:
+            matches.append({
+                "skill": r.get("name", ""),
+                "description": r.get("description", ""),
+                "score": round(r.get("score", 0), 3)
+            })
+        return {"matches": matches}
+    except Exception as e:
+        print(f"Skill search error: {e}")
+        return {"matches": []}
+
 @app.post("/api/chat")
 async def chat_endpoint(request: ChatRequest):
     query = request.query
     
     async def generate():
         full_response = ""
+        
+        # 🔍 Vector search: embed query and find matching active skills
+        try:
+            print(f"🔍 Embedding query: '{query[:50]}...'")
+            query_embedding = get_embedding(query)
+            print(f"✅ Embedding generated ({len(query_embedding)} dimensions)")
+            
+            skill_results = await search_active_skills(query_embedding, limit=3)
+            print(f"🔍 Vector search returned {len(skill_results)} results")
+            
+            if skill_results:
+                for i, r in enumerate(skill_results):
+                    print(f"   Match {i+1}: {r.get('name', '?')} (score: {r.get('score', 0):.3f})")
+                
+                # Emit top match as early SSE event
+                top = skill_results[0]
+                yield f"data: {json.dumps({'type': 'skill_match', 'skill': top.get('name', ''), 'score': round(top.get('score', 0), 3)})}\n\n"
+                
+                # Emit all matches as early SSE event
+                matches = [{"skill": r.get("name", ""), "score": round(r.get("score", 0), 3)} for r in skill_results]
+                yield f"data: {json.dumps({'type': 'skill_matches', 'matches': matches})}\n\n"
+            else:
+                print("⚠️ Vector search returned 0 results (no matching skills or index missing)")
+        except Exception as e:
+            print(f"❌ Skill vector search failed (non-blocking): {e}")
+            import traceback
+            traceback.print_exc()
         
         # 🧠 Skills are handled internally by gemini_llm -> skill_retriever -> mongodb_store
         for chunk in chat_stream(query):
@@ -106,7 +158,7 @@ if os.path.exists(ui_dir):
 
 if __name__ == "__main__":
     print("\n" + "="*50)
-    print("🚀 Starting Chanakya AI Unified Server...")
+    print("🚀 Starting Kaushal AI Unified Server...")
     print("👉 1. The Python LLM Backend is ACTIVE.")
     print("👉 2. The React Frontend is being SERVED.")
     print("🔗 OPEN THIS IN YOUR BROWSER: http://localhost:8000")
