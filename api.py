@@ -7,10 +7,11 @@ from pydantic import BaseModel
 import os
 import json
 
-from gemini_llm import chat_stream
+from llm_service import chat_stream
 from memory.interaction_logger import log_interaction
-from skills.skills_extractor import extract_skills
-from skills.skill_store import add_skills
+from skills.observer import run_observer
+from skills.mongodb_store import candidates_col, promote_to_active
+import asyncio
 
 app = FastAPI()
 
@@ -25,27 +26,74 @@ app.add_middleware(
 class ChatRequest(BaseModel):
     query: str
 
+class PromotionRequest(BaseModel):
+    candidate_id: str
+    name: str
+    description: str
+    trigger: str
+    instructions: str
+
 @app.post("/api/chat")
 async def chat_endpoint(request: ChatRequest):
     query = request.query
     
-    def generate():
+    async def generate():
         full_response = ""
         
-        # 🧠 Skills are now handled internally by the retrieval module in build_prompt
+        # 🧠 Skills are handled internally by gemini_llm -> skill_retriever -> mongodb_store
         for chunk in chat_stream(query):
             full_response += chunk
             yield f"data: {json.dumps({'chunk': chunk})}\n\n"
             
         try:
             log_interaction(query, full_response)
-            skills = extract_skills()
-            if skills:
-                add_skills(skills)
+            # 🔥 Trigger the Observer in the background (Non-blocking)
+            asyncio.create_task(run_observer(query, full_response))
         except Exception as e:
-            print(f"Background save error: {e}")
+            print(f"Background Observer error: {e}")
             
     return StreamingResponse(generate(), media_type="text/event-stream")
+
+@app.get("/api/patterns/candidates")
+async def get_candidates():
+    """Returns the extraction queue for the UI."""
+    cursor = candidates_col.find({}).sort("timestamp", -1)
+    candidates = await cursor.to_list(length=20)
+    for c in candidates:
+        c["_id"] = str(c["_id"])
+        # Remove embedding from UI response to keep it light
+        if "embedding" in c: del c["embedding"]
+    return candidates
+
+@app.post("/api/patterns/approve")
+async def approve_pattern(request: PromotionRequest):
+    """Promotes a candidate to an Active Skill."""
+    from bson import ObjectId
+    skill_data = {
+        "name": request.name,
+        "description": request.description,
+        "trigger": request.trigger,
+        "instructions": request.instructions,
+    }
+    # Optional: Get embedding for the new active skill if needed for later retrieval
+    from llm_service import get_embedding
+    skill_data["embedding"] = get_embedding(request.instructions)
+    
+    await promote_to_active(skill_data)
+    # Remove the candidate after promotion
+    await candidates_col.delete_one({"_id": ObjectId(request.candidate_id)})
+    return {"status": "success", "message": f"Skill '{request.name}' activated."}
+
+@app.post("/api/patterns/ignore")
+async def ignore_pattern(request: dict):
+    """Removes a candidate from the queue without promoting."""
+    from bson import ObjectId
+    candidate_id = request.get("candidate_id")
+    if not candidate_id:
+        return {"status": "error", "message": "Missing candidate_id"}
+    
+    await candidates_col.delete_one({"_id": ObjectId(candidate_id)})
+    return {"status": "success", "message": "Pattern ignored."}
 
 ui_dir = os.path.join(os.path.dirname(__file__), "ui", "dist")
 if os.path.exists(ui_dir):
