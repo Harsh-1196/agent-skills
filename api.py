@@ -31,6 +31,8 @@ async def chat_endpoint(request: ChatRequest):
     
     def generate():
         full_response = ""
+        
+        # 🧠 Skills are now handled internally by the retrieval module in build_prompt
         for chunk in chat_stream(query):
             full_response += chunk
             yield f"data: {json.dumps({'chunk': chunk})}\n\n"

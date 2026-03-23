@@ -1,33 +1,9 @@
-# import os
-# from dotenv import load_dotenv
-# import config
-# from google import genai
-
-# # Load environment variables
-# load_dotenv()
-
-# client = genai.Client()
-
-# def chat(messages: str) -> str:
-#     response = client.models.generate_content(
-#         model=config.MODEL_NAME,
-#         contents=messages
-#     )
-#     return response.text
-
-# def chat_stream(messages: str):
-#     response = client.models.generate_content_stream(
-#         model=config.MODEL_NAME,
-#         contents=messages
-#     )
-#     for chunk in response:
-#         if chunk.text:
-#             yield chunk.text
 import os
 import time
 from dotenv import load_dotenv
 from google import genai
 import config
+from retrieval.skill_retriever import get_skills_context
 
 # Load environment variables
 load_dotenv()
@@ -75,15 +51,16 @@ Follow these rules strictly:
 Your goal is to produce clean, readable, and properly formatted text that respects the original structure and displays correctly in a streaming UI.
 """
 
-def build_prompt(user_input: str) -> str:
-    return f"{FORMATTER_PROMPT}\n\nUser Input:\n{user_input}"
+def build_prompt(user_input: str, skills: list = None) -> str:
+    skills_context = get_skills_context(skills)
+    return f"{FORMATTER_PROMPT}{skills_context}\n\nUser Input:\n{user_input}"
 
 
 # =========================
 # ✅ NORMAL RESPONSE
 # =========================
-def chat(messages: str) -> str:
-    prompt = build_prompt(messages)
+def chat(messages: str, skills: list = None) -> str:
+    prompt = build_prompt(messages, skills)
 
     response = client.models.generate_content(
         model=config.MODEL_NAME,
@@ -96,8 +73,8 @@ def chat(messages: str) -> str:
 # =========================
 # 🔥 TYPEWRITER STREAM
 # =========================
-def chat_stream(messages: str):
-    prompt = build_prompt(messages)
+def chat_stream(messages: str, skills: list = None):
+    prompt = build_prompt(messages, skills)
 
     response = client.models.generate_content_stream(
         model=config.MODEL_NAME,

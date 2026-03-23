@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Network, User } from 'lucide-react';
-import type { Message } from '../App';
+import type { Message } from './ChatArea';
 import { motion } from 'framer-motion';
 
 interface OrchestrationStreamProps {

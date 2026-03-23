@@ -388,5 +388,53 @@
     "description": "Ultra-Reliable Low-Latency Communications, a 5G service that provides near-instantaneous and highly dependable communication",
     "trigger": "Explain URLLC",
     "instructions": "Explain the purpose and benefits of URLLC, including its applications in autonomous vehicles, remote surgery, and industrial automation"
+  },
+  {
+    "name": "BFS Algorithm Explanation",
+    "description": "Explaining the Breadth-First Search algorithm",
+    "trigger": "Explain BFS",
+    "instructions": "Provide a detailed explanation of the Breadth-First Search algorithm, including how it works, its applications, and examples."
+  },
+  {
+    "name": "BFS Implementation",
+    "description": "Implementing the Breadth-First Search algorithm",
+    "trigger": "Implement BFS",
+    "instructions": "Provide a code implementation of the Breadth-First Search algorithm in a programming language, including explanations of the code and example use cases."
+  },
+  {
+    "name": "5G and Beamforming Explanation",
+    "description": "Explaining 5G and beamforming technology",
+    "trigger": "Explain 5G and beamforming",
+    "instructions": "Provide a detailed explanation of 5G technology and beamforming, including how beamforming enhances data rates and its applications in 5G networks."
+  },
+  {
+    "name": "AI Agents Explanation",
+    "description": "Explaining AI agents and their types",
+    "trigger": "Explain AI agents",
+    "instructions": "Provide a detailed explanation of AI agents, including their components, types, and applications, as well as examples of how they are used in various industries."
+  },
+  {
+    "name": "Breadth-First Search (BFS) Algorithm",
+    "description": "A graph traversal algorithm that visits all the nodes in a graph level by level, starting from a given source node",
+    "trigger": "Graph traversal, finding shortest path, web crawlers",
+    "instructions": "Choose a source node, create a queue, enqueue the source node, mark the source node as visited, and then repeatedly dequeue a node, visit its unvisited neighbors, and mark them as visited"
+  },
+  {
+    "name": "5G Beamforming",
+    "description": "A signal processing technique that directs a focused radio signal towards a specific user device to enhance data rates",
+    "trigger": "5G technology, wireless communication, data rate enhancement",
+    "instructions": "Use a Massive MIMO antenna to create a narrow beam of radio frequency energy, reducing interference and increasing signal strength"
+  },
+  {
+    "name": "AI Agent",
+    "description": "An autonomous entity that perceives its environment and acts upon it to achieve specific objectives",
+    "trigger": "Artificial intelligence, machine learning, autonomous systems",
+    "instructions": "Design an agent with perception, reasoning, action, and learning capabilities to achieve goals in a dynamic environment"
+  },
+  {
+    "name": "5G Service Types",
+    "description": "Three main service types of 5G technology: eMBB, URLLC, and mMTC",
+    "trigger": "5G technology, wireless communication, service types",
+    "instructions": "Understand the characteristics and applications of each service type: eMBB for high-speed data, URLLC for low-latency communications, and mMTC for massive IoT device connectivity"
   }
 ]

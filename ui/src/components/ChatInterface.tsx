@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import type { Message } from '../App';
+import type { Message } from './ChatArea';
 import { Bot, User } from 'lucide-react';
 
 interface ChatInterfaceProps {
