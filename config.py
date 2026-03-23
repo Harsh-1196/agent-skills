@@ -1,4 +1,17 @@
-MODEL_NAME = "gemini-2.5-flash"
-EMBEDDING_MODEL = "models/embedding-001"
+import os
+from dotenv import load_dotenv
 
-grok_MODEL_NAME = "llama-3.3-70b-versatile"
+load_dotenv()
+
+# Gemini Configuration (Main Chat + Embeddings)
+CHAT_MODEL = "gemini-2.5-flash" 
+EMBEDDING_MODEL = "models/gemini-embedding-001"
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+
+# Groq Configuration (Observer + Clustering)
+OBSERVER_MODEL = "llama-3.3-70b-versatile"
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+
+# Backwards compatibility
+MODEL_NAME = CHAT_MODEL
+grok_MODEL_NAME = OBSERVER_MODEL
