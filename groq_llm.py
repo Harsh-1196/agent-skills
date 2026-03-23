@@ -13,12 +13,25 @@ client = OpenAI(
 )
 
 #load model
-def chat(messages: str) -> str:
+def chat(messages: str = None, *, system: str = None, message: str = None) -> str:
+    """
+    Two call patterns:
+      1. chat("some query")            – simple user message
+      2. chat(system="...", message="...") – system + user message (for skill extraction)
+    """
+    chat_messages = []
+
+    if system:
+        chat_messages.append({"role": "system", "content": system})
+
+    # Use 'message' kwarg if provided, otherwise fall back to positional 'messages'
+    user_content = message if message is not None else messages
+    if user_content:
+        chat_messages.append({"role": "user", "content": user_content})
+
     response = client.chat.completions.create(
         model=config.grok_MODEL_NAME,
-        messages=[
-            {"role": "user", "content": messages}
-        ],
+        messages=chat_messages,
         temperature=0.7
     )
     return response.choices[0].message.content
