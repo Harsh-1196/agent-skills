@@ -1,82 +1,68 @@
-# Adaptive Agent Skills
+# Chanakya AI (Neural Monolith)
 
-A Python-based conversational AI agent designed to dynamically learn and extract reusable skills from user interactions. The agent chats with you, transparently logs the history of your interactions, and periodically analyzes the conversation context to develop specialized "skills", storing them in a local knowledge base for future reference.
+A next-generation, cyberpunk-styled dashboard powered by Adaptive Agent Skills. Chanakya AI features a stunning "Synapse Monolith" React interface over a blazing fast Python API, designed to dynamically learn, stream real-time responses, and extract reusable skills from user interactions.
 
 ## Features
 
-- **Conversational REPL**: A responsive command-line interface powered by state-of-the-art LLMs.
-- **Interaction Memory Base**: Automatically logs the entire chat history (queries and responses) in a structured `.jsonl` format.
-- **Dynamic Skill Extraction**: Analyzes recent chat history (every 5 interactions) and automatically distills recognized patterns into reusable JSON "skills" (including triggers, instructions, and descriptions).
-- **Multi-Model Support**: Easily extensible AI wrappers for Groq (Llama-3) and Google Gemini models.
+- **Holographic Neural UI**: A deeply satisfying, cyberpunk-themed React (Vite) interface complete with animated particle networks and immersive typewriter streaming effects.
+- **Server-Sent Events (SSE) Streaming**: Connects seamlessly to the FastAPI backend to stream Gemini LLM tokens in real-time, simulating an authentic terminal intelligence.
+- **Interaction Memory Base**: Automatically logs the entire chat history in a structured `.jsonl` format behind the scenes.
+- **Dynamic Skill Extraction**: Analyzes recent chat history and distills recognized patterns into reusable JSON "skills" (including triggers, instructions, and descriptions).
+- **Google GenAI Support**: Uses the latest `google-genai` SDK with custom personality prompts for clean, beautiful formatting.
 
 ## Project Structure
 
 ```text
 agent-skills/
-├── main.py                          # Main entry point and chat loop
+├── api.py                           # Unified FastAPI server (Backend + serves UI)
+├── main.py                          # Legacy terminal chat loop
 ├── config.py                        # Model configuration settings
 ├── .env                             # Environment variables (API keys)
-├── groq_llm.py                      # Groq API integration
-├── gemini_llm.py                    # Google Gemini API integration
+├── gemini_llm.py                    # Google Gemini streaming integration
 ├── memory/
 │   └── interaction_logger.py        # Module for logging & loading interactions
 ├── skills/
 │   ├── skills_extractor.py          # LLM-based logic to extract skills
 │   └── skill_store.py               # Persists and loads `.json` skills
+├── ui/                              # The React + Vite neo-terminal frontend
 └── data/                            # Auto-generated runtime data
-    ├── interactions.jsonl           # Log of all queries and responses
-    └── skills.json                  # Extracted skills knowledge base
+    ├── interactions.jsonl           
+    └── skills.json                  
 ```
 
 ## Prerequisites
 
-- Python 3.8+
-- The following Python libraries:
-  - `openai`
-  - `python-dotenv`
-  - `google-generativeai`
+- Python 3.12+
+- Node.js & npm (for building the UI)
 
 ## Installation
 
 1. Clone or download the repository to your local machine.
-2. Initialize and activate a virtual environment (recommended):
-   ```bash
-   python3 -m venv .venv
-   source .venv/bin/activate
-   ```
-3. Install the dependencies:
-   ```bash
-   pip install openai python-dotenv google-generativeai
-   ```
-4. Configure your API keys. Create a `.env` file in the root directory (if not already present):
+2. Configure your API keys in a `.env` file in the root directory:
    ```env
    GEMINI_API_KEY=your_gemini_api_key_here
-   GROQ_API_KEY=your_groq_api_key_here
    ```
-
-## Configuration
-
-You can update the models used by editing `config.py`. By default:
-- `mdoel_name`: Specifies the Groq model (e.g., `llama-3.3-70b-versatile`).
-- `MODEL_NAME`: Specifies the Gemini model (e.g., `gemini-2.5-flash`).
+3. Install the Python dependencies:
+   ```bash
+   pip install fastapi uvicorn google-genai openai python-dotenv pydantic
+   ```
+4. Build the React UI (if making dev changes):
+   ```bash
+   cd ui
+   npm install
+   npm run build
+   cd ..
+   ```
 
 ## Usage
 
-Start the agent directly via the terminal:
+Start the unified backend + frontend server:
 
 ```bash
-python3 main.py
+python3 api.py
 ```
 
-1. You will be greeted by a `User: ` prompt.
-2. Type your query and press Enter. The agent will respond, and the interaction will be securely logged in `data/interactions.jsonl`.
-3. Keep chatting! Once the threshold is met (every 5 interactions), the `skills_extractor` will engage. You will see raw outputs as the agent uses LLM logic to distil and save new behaviors to `data/skills.json`.
-
-## Extending the Agent
-
-- **New Models**: You can add new `.py` scripts following the signature in `groq_llm.py` and replace the import in `main.py`.
-- **Advanced Skill Execution**: Currently, the system builds a knowledge tree in `skills.json`. You can build further execution orchestration modules on top of this stored metadata.
-
-## License
-
-This project is licensed under the MIT License.
+1. Open your browser and navigate to **http://localhost:8000**
+2. You will be greeted by the `NEURAL_MONOLITH` dashboard.
+3. Type your query into the terminal input at the bottom and watch the intelligence stream back with human-like typewriter delays!
+4. Behind the scenes, the agent will learn new skills and log them into `data/skills.json`.

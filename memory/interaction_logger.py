@@ -1,5 +1,5 @@
 """
-we now need to save the whole interactiopn for the llm to find patterns and skills later
+we now need to save the whole interaction for the llm to find patterns and skills later
 need to save interactions like this
 {
  "query": "explain quicksort",
