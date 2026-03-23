@@ -1,440 +1,75 @@
 [
-  {
-    "name": "Explain Radix Sort",
-    "description": "Non-comparative sorting algorithm that sorts integers or strings by grouping elements with the same individual digits or characters into bins",
-    "trigger": "explain radix sort",
-    "instructions": "Iterate by digit place, use stable sub-sort, and repeat until all digit places are processed"
-  },
-  {
-    "name": "Explain Dynamic Programming",
-    "description": "Algorithmic technique for solving complex problems efficiently by breaking them down into smaller, overlapping subproblems",
-    "trigger": "explain dp",
-    "instructions": "Break down into smaller subproblems, solve each subproblem only once, and store its solution"
-  },
-  {
-    "name": "Greet User",
-    "description": "Respond to a greeting with a friendly message",
-    "trigger": "hii, hey",
-    "instructions": "Respond with a friendly message, such as 'Hi there! How can I help you today?' or 'Hey, how's it going? Is there something I can help you with or would you like to chat?'"
-  },
-  {
-    "name": "Observability Platforms",
-    "description": "Understanding and explaining observability platforms such as Datadog and New Relic",
-    "trigger": "Explain observability platforms",
-    "instructions": "Provide a detailed explanation of observability platforms, including their features, strengths, and considerations"
-  },
-  {
-    "name": "Shortest Path Algorithms",
-    "description": "Explaining and applying shortest path algorithms such as Dijkstra's, Bellman-Ford, and Floyd-Warshall",
-    "trigger": "Explain shortest path algorithms",
-    "instructions": "Provide a detailed explanation of shortest path algorithms, including their mechanisms, time complexities, and applications"
-  },
-  {
-    "name": "Radix Sort",
-    "description": "Explaining the Radix Sort algorithm",
-    "trigger": "Explain Radix Sort",
-    "instructions": "Provide a brief explanation of the Radix Sort algorithm, including its process and usage"
-  },
-  {
-    "name": "Dynamic Programming",
-    "description": "Explaining and applying Dynamic Programming (DP) concepts",
-    "trigger": "Explain Dynamic Programming",
-    "instructions": "Provide a brief explanation of Dynamic Programming, including its key ideas, applications, and implementation methods"
-  },
-  {
-    "name": "Breadth-First Search (BFS)",
-    "description": "Explaining and implementing the Breadth-First Search (BFS) algorithm",
-    "trigger": "Explain BFS",
-    "instructions": "Provide a detailed explanation of the BFS algorithm, including its mechanism, example use case, code implementation, time and space complexity"
-  },
-  {
-    "name": "Graph Theory and Shortest Path Algorithms",
-    "description": "Understanding graph theory and shortest path algorithms such as BFS, Dijkstra's, Bellman-Ford, and Floyd-Warshall.",
-    "trigger": "Graph theory, shortest path, algorithms",
-    "instructions": "Study graph theory fundamentals, learn the basics of each algorithm, and practice implementing them."
-  },
-  {
-    "name": "Radix Sort",
-    "description": "Understanding the Radix Sort algorithm and its application in sorting integers or strings.",
-    "trigger": "Radix sort, sorting algorithm",
-    "instructions": "Learn the step-by-step process of Radix Sort, understand its time and space complexity, and practice implementing it."
-  },
-  {
-    "name": "Dynamic Programming",
-    "description": "Understanding the concept of Dynamic Programming and its application in solving complex problems.",
-    "trigger": "Dynamic programming, optimization",
-    "instructions": "Learn the basics of Dynamic Programming, understand how to break down complex problems, and practice solving problems using memoization or tabulation."
-  },
-  {
-    "name": "Breadth-First Search (BFS)",
-    "description": "Understanding the BFS algorithm and its application in graph traversal.",
-    "trigger": "BFS, graph traversal, algorithm",
-    "instructions": "Learn the step-by-step process of BFS, understand its time and space complexity, and practice implementing it in different scenarios."
-  },
-  {
-    "name": "AI Agents and Machine Learning",
-    "description": "Understanding the concept of AI agents, their components, and how they learn through machine learning algorithms.",
-    "trigger": "AI agents, machine learning, artificial intelligence",
-    "instructions": "Learn the basics of AI agents, understand the different types of agents, and study the various machine learning algorithms used for agent learning."
-  },
-  {
-    "name": "Radix Sort",
-    "description": "A non-comparative sorting algorithm that sorts integers by grouping elements with the same individual digits or characters into bins",
-    "trigger": "Sorting integers",
-    "instructions": "Iterate by digit place, use stable sorting algorithm, and repeat until all digit places are processed"
-  },
-  {
-    "name": "Dynamic Programming",
-    "description": "An algorithmic technique for solving complex problems efficiently by breaking them down into smaller, overlapping subproblems",
-    "trigger": "Solving complex problems",
-    "instructions": "Break down into smaller subproblems, solve each subproblem only once, and store its solution"
-  },
-  {
-    "name": "Breadth-First Search",
-    "description": "A graph traversal algorithm that explores a graph or tree level by level, starting from a given source node",
-    "trigger": "Graph traversal",
-    "instructions": "Choose a starting node, create a queue, enqueue the starting node, and explore its neighbors"
-  },
-  {
-    "name": "AI Agents",
-    "description": "Computer programs that use artificial intelligence and machine learning to perform tasks that typically require human intelligence",
-    "trigger": "Autonomous decision-making",
-    "instructions": "Perceive the environment, reason about the current state, and take actions to achieve goals"
-  },
-  {
-    "name": "Agent Architecture",
-    "description": "A framework for building autonomous entities that perceive their environment and take actions to achieve their goals",
-    "trigger": "Building autonomous entities",
-    "instructions": "Design perception, reasoning, and action components, and integrate them with a knowledge base and goals"
-  },
-  {
-    "name": "Dynamic Programming",
-    "description": "An algorithmic technique for solving complex problems efficiently by breaking them down into smaller, overlapping subproblems.",
-    "trigger": "Solving complex problems with overlapping subproblems",
-    "instructions": "Break down the problem into smaller subproblems, solve each subproblem only once, and store its solution to prevent redundant calculations."
-  },
-  {
-    "name": "Breadth-First Search (BFS) Algorithm",
-    "description": "A graph traversal algorithm that explores a graph or tree level by level, starting from a given source node.",
-    "trigger": "Traversing a graph or tree level by level",
-    "instructions": "Choose a starting node, create a queue, enqueue the starting node, mark it as visited, and explore its neighbors level by level."
-  },
-  {
-    "name": "AI Agents",
-    "description": "Autonomous entities that perceive their environment and take actions to achieve specific goals.",
-    "trigger": "Creating autonomous entities that interact with their environment",
-    "instructions": "Design an agent with perception, reasoning, and action capabilities, and provide it with goals and autonomy to operate in its environment."
-  },
-  {
-    "name": "Agent Architecture",
-    "description": "A design pattern for building agents, consisting of perception, inference engine, action executor, and knowledge base components.",
-    "trigger": "Building agents with a structured architecture",
-    "instructions": "Design an agent with a sensor component, an inference engine, an action executor, and a knowledge base to enable perception, reasoning, and action."
-  },
-  {
-    "name": "Reinforcement Learning",
-    "description": "A machine learning approach that enables agents to learn from trial and error by receiving rewards or penalties for their actions.",
-    "trigger": "Enabling agents to learn from trial and error",
-    "instructions": "Implement a reinforcement learning algorithm that allows the agent to explore its environment, receive rewards or penalties, and adapt its behavior to maximize cumulative rewards."
-  },
-  {
-    "name": "BFS Algorithm",
-    "description": "Breadth-First Search algorithm for graph traversal",
-    "trigger": "graph traversal",
-    "instructions": "Start at a source node, explore all immediate neighbors, then all neighbors of those neighbors, and so on"
-  },
-  {
-    "name": "AI Agent",
-    "description": "Autonomous entity that perceives its environment and takes actions to achieve goals",
-    "trigger": "autonomous system",
-    "instructions": "Perceive environment, reason about current state, and take actions to achieve goals"
-  },
-  {
-    "name": "Agent Architecture",
-    "description": "Components of an AI agent, including perception, reasoning, action, and goals",
-    "trigger": "agent architecture",
-    "instructions": "Design an agent with sensors, inference engine, action executor, and knowledge base"
-  },
-  {
-    "name": "BFS Implementation",
-    "description": "Implementing Breadth-First Search algorithm using a queue",
-    "trigger": "BFS implementation",
-    "instructions": "Use a queue to manage nodes to visit, mark visited nodes, and explore neighbors"
-  },
-  {
-    "name": "Shortest Path",
-    "description": "Finding the shortest path between two nodes in an unweighted graph",
-    "trigger": "shortest path",
-    "instructions": "Use BFS to explore all nodes level by level and find the shortest path"
-  },
-  {
-    "name": "Explaining AI Agents",
-    "description": "Explain how AI agents work, including their components, types, and applications",
-    "trigger": "Explain AI agents",
-    "instructions": "Provide a detailed explanation of AI agents, covering their perception, reasoning, action, and learning capabilities, as well as their various types and applications"
-  },
-  {
-    "name": "Describing Agent Architecture",
-    "description": "Describe the architecture of agents, including their components and how they interact",
-    "trigger": "Explain agent architecture",
-    "instructions": "Outline the key components of an agent, such as sensors, inference engines, action executors, and knowledge bases, and explain how they work together"
-  },
-  {
-    "name": "Breadth-First Search (BFS) Explanation",
-    "description": "Explain the Breadth-First Search (BFS) algorithm, including its key concepts and how it works",
-    "trigger": "Explain BFS",
-    "instructions": "Provide a step-by-step explanation of the BFS algorithm, including its use of a queue, visited set, and level-by-level exploration"
-  },
-  {
-    "name": "Identifying BFS Applications",
-    "description": "Identify the applications of Breadth-First Search (BFS), including finding shortest paths and connected components",
-    "trigger": "BFS applications",
-    "instructions": "List the various applications of BFS, such as finding shortest paths in unweighted graphs, web crawlers, social networking, and pathfinding in games and mazes"
-  },
-  {
-    "name": "Comparing BFS and DFS",
-    "description": "Compare and contrast Breadth-First Search (BFS) and Depth-First Search (DFS) algorithms",
-    "trigger": "BFS vs DFS",
-    "instructions": "Explain the differences between BFS and DFS, including their exploration strategies, data structures, and applications"
-  },
-  {
-    "name": "Explaining AI Agents",
-    "description": "Ability to explain how AI agents work, including their components and architectures.",
-    "trigger": "Explain how AI agents work",
-    "instructions": "Provide a detailed explanation of AI agents, including their perception, reasoning, action, and goals, as well as different types of agents and their applications."
-  },
-  {
-    "name": "Describing BFS",
-    "description": "Ability to describe the Breadth-First Search algorithm, including its key concepts and how it works.",
-    "trigger": "Explain BFS",
-    "instructions": "Provide a detailed explanation of the BFS algorithm, including its level-by-level exploration, queue data structure, and visited set, as well as its time and space complexity."
-  },
-  {
-    "name": "Comparing BFS and DFS",
-    "description": "Ability to compare and contrast the Breadth-First Search and Depth-First Search algorithms.",
-    "trigger": "Compare BFS and DFS",
-    "instructions": "Provide a detailed comparison of the BFS and DFS algorithms, including their differences in traversal order, data structures, and applications."
-  },
-  {
-    "name": "Applying BFS",
-    "description": "Ability to apply the Breadth-First Search algorithm to real-world problems, including finding shortest paths and connected components.",
-    "trigger": "Apply BFS to a problem",
-    "instructions": "Use the BFS algorithm to solve a given problem, such as finding the shortest path between two nodes in an unweighted graph or determining if a graph is connected."
-  },
-  {
-    "name": "BFS Algorithm",
-    "description": "Graph traversal algorithm that explores all the vertices of a graph or tree level by level, starting from a given source node.",
-    "trigger": "Query: explain bfs",
-    "instructions": "Start at a source node, explore all its immediate neighbors, then all the neighbors of those neighbors, and so on, using a queue data structure to keep track of nodes to visit next."
-  },
-  {
-    "name": "Transformers Architecture",
-    "description": "Neural network architecture that uses self-attention mechanisms to weigh the importance of different input elements relative to each other.",
-    "trigger": "Query: i need to know about transformers in a structured way",
-    "instructions": "Utilize self-attention and multi-head attention to process input sequences in parallel, incorporating positional encoding to preserve sequence order information."
-  },
-  {
-    "name": "Graph Traversal",
-    "description": "The process of visiting each node in a graph or tree data structure, which can be achieved through algorithms like BFS or DFS.",
-    "trigger": "Query: explain ai agents in bullet points",
-    "instructions": "Apply algorithms such as BFS or DFS to systematically explore all nodes in a graph or tree, which is crucial for tasks like finding shortest paths or determining graph connectivity."
-  },
-  {
-    "name": "Self-Attention Mechanism",
-    "description": "A component of transformer models that allows the model to attend to different parts of the input sequence simultaneously and weigh their importance.",
-    "trigger": "Query: i need to know about transformers in a structured way",
-    "instructions": "Implement self-attention by computing attention weights based on the input elements, which enables the model to focus on relevant parts of the input sequence when generating output."
-  },
-  {
-    "name": "Positional Encoding",
-    "description": "A technique used in transformer models to preserve the order of the input sequence, as the self-attention mechanism is permutation-invariant.",
-    "trigger": "Query: i need to know about transformers in a structured way",
-    "instructions": "Add positional encoding to the input embeddings to preserve sequence order information, ensuring the model understands the position of each element in the input sequence."
-  },
-  {
-    "name": "Breadth-First Search",
-    "description": "Graph traversal algorithm that systematically explores all the vertices of a graph or tree, level by level, starting from a chosen source vertex.",
-    "trigger": "Query: explain bfs",
-    "instructions": "1. Create a queue and add the source node to it. 2. Create a visited set and add the source node to it. 3. While the queue is not empty, dequeue a node, process it, and enqueue its unvisited neighbors."
-  },
-  {
-    "name": "Transformer Architecture",
-    "description": "Neural network architecture introduced in 2017, revolutionizing natural language processing with its self-attention mechanism and parallel processing capabilities.",
-    "trigger": "Query: i need to know about transformers in a structured way",
-    "instructions": "1. Understand the self-attention mechanism. 2. Learn about multi-head attention. 3. Study the encoder-decoder structure and positional encoding."
-  },
-  {
-    "name": "AI Agents",
-    "description": "Autonomous entities that perceive their surroundings, decide, and act to achieve specific goals, ranging from simple thermostats to complex chatbots and self-driving cars.",
-    "trigger": "Query: explain ai agents in bullet points",
-    "instructions": "1. Identify the key components of an AI agent, including sensors, effectors, and decision-making processes. 2. Understand the objectives and optimization goals of AI agents. 3. Explore various examples of AI agents and their applications."
-  },
-  {
-    "name": "BFS Algorithm",
-    "description": "Breadth-First Search algorithm for graph traversal",
-    "trigger": "query about graph traversal or BFS",
-    "instructions": "Use a queue to explore nodes level by level, starting from a given source node"
-  },
-  {
-    "name": "Transformer Architecture",
-    "description": "Neural network architecture for natural language processing",
-    "trigger": "query about transformers or NLP",
-    "instructions": "Use self-attention mechanisms and positional encoding to process input sequences in parallel"
-  },
-  {
-    "name": "AI Agent Development",
-    "description": "Design and implementation of autonomous AI agents",
-    "trigger": "query about AI agents or autonomous systems",
-    "instructions": "Use sensors, effectors, and decision-making processes to achieve specific goals"
-  },
-  {
-    "name": "5G Network Services",
-    "description": "Understanding of 5G services like mMTC and their applications",
-    "trigger": "query about 5G or mMTC",
-    "instructions": "Optimize network for massive Machine-Type Communications and IoT devices"
-  },
-  {
-    "name": "Breadth First Search (BFS) Explanation",
-    "description": "Explaining the Breadth First Search algorithm and its applications",
-    "trigger": "explain bfs",
-    "instructions": "Provide a detailed explanation of the BFS algorithm, its process, and its uses in graph and tree data structures"
-  },
-  {
-    "name": "Transformers Architecture",
-    "description": "Providing a structured explanation of transformers in neural networks",
-    "trigger": "i need to know about transformers in a structured way",
-    "instructions": "Describe the transformers architecture, its key components, and its applications in natural language processing"
-  },
-  {
-    "name": "AI Agents Overview",
-    "description": "Providing an overview of AI agents and their characteristics",
-    "trigger": "explain ai agents in bullet points",
-    "instructions": "List the key components and features of AI agents, including their ability to perceive, decide, and act"
-  },
-  {
-    "name": "5G Cellular Technology",
-    "description": "Explaining the features and applications of 5G technology",
-    "trigger": "help me learn how 5g works like mMTC and so on",
-    "instructions": "Describe the three main types of 5G connectivity: eMBB, URLLC, and mMTC, and provide examples of their applications"
-  },
-  {
-    "name": "5G Connectivity Types",
-    "description": "Explaining the different types of 5G connectivity and their applications",
-    "trigger": "help me learn how 5g works like mMTC and so on",
-    "instructions": "Provide a detailed explanation of eMBB, URLLC, and mMTC, including their features, benefits, and use cases"
-  },
-  {
-    "name": "Explaining Complex Technologies",
-    "description": "Ability to break down intricate technological concepts into understandable parts",
-    "trigger": "User requests explanation of complex technologies like transformers or 5G",
-    "instructions": "Provide detailed, structured information about the technology, including its components, functionalities, and applications"
-  },
-  {
-    "name": "Summarizing Information in Bullet Points",
-    "description": "Skill to summarize key points about a topic, such as AI agents, into concise bullet points",
-    "trigger": "User asks for information in bullet points",
-    "instructions": "Identify main aspects of the topic and present them in a clear, bullet-point format"
-  },
-  {
-    "name": "Comparing Technologies",
-    "description": "Ability to compare different technologies, such as 4G and 5G, highlighting their differences and improvements",
-    "trigger": "User requests comparison between technologies",
-    "instructions": "Outline key differences, improvements, and new features of the technologies being compared"
-  },
-  {
-    "name": "Providing Detailed Technical Information",
-    "description": "Skill to deliver in-depth technical details about specific technologies or concepts, like mMTC in 5G",
-    "trigger": "User seeks detailed technical information",
-    "instructions": "Offer comprehensive, technical explanations, including how the technology works, its applications, and its significance"
-  },
-  {
-    "name": "Explain AI Agents",
-    "description": "Autonomous entities that perceive surroundings and take actions to achieve specific goals",
-    "trigger": "Explain AI agents",
-    "instructions": "Provide information on AI agents, including their operation, key components, and examples"
-  },
-  {
-    "name": "Understand 5G Technology",
-    "description": "Fifth generation of cellular technology with higher peak data speeds, ultra low latency, and more reliability",
-    "trigger": "Help me learn about 5G",
-    "instructions": "Explain 5G services, including mMTC, eMBB, and URLLC, and their applications"
-  },
-  {
-    "name": "Compare 4G and 5G",
-    "description": "Differences in speed, latency, capacity, bandwidth, and applications between 4G and 5G",
-    "trigger": "I want to know more about how 4G is different from 5G",
-    "instructions": "Highlight the key differences between 4G and 5G, including speed, latency, and applications"
-  },
-  {
-    "name": "Explain Beamforming in 5G",
-    "description": "Technique that directs a wireless signal towards a specific user or device using multiple antennas and phase shifting",
-    "trigger": "Teach me about beamforming in 5G",
-    "instructions": "Describe how beamforming works, including the use of multiple antennas, phase shifting, and dynamic adjustment"
-  },
-  {
-    "name": "Describe mMTC",
-    "description": "Massive Machine-Type Communications, a 5G service that efficiently supports a huge number of connected devices",
-    "trigger": "Help me learn about mMTC",
-    "instructions": "Explain the purpose and benefits of mMTC, including its optimization for IoT devices and applications"
-  },
-  {
-    "name": "Explain eMBB",
-    "description": "Enhanced Mobile Broadband, a 5G service that provides extremely fast download and upload speeds",
-    "trigger": "Explain eMBB",
-    "instructions": "Describe the benefits and applications of eMBB, including 4K/8K video streaming and virtual reality"
-  },
-  {
-    "name": "Understand URLLC",
-    "description": "Ultra-Reliable Low-Latency Communications, a 5G service that provides near-instantaneous and highly dependable communication",
-    "trigger": "Explain URLLC",
-    "instructions": "Explain the purpose and benefits of URLLC, including its applications in autonomous vehicles, remote surgery, and industrial automation"
-  },
-  {
-    "name": "BFS Algorithm Explanation",
-    "description": "Explaining the Breadth-First Search algorithm",
-    "trigger": "Explain BFS",
-    "instructions": "Provide a detailed explanation of the Breadth-First Search algorithm, including how it works, its applications, and examples."
-  },
-  {
-    "name": "BFS Implementation",
-    "description": "Implementing the Breadth-First Search algorithm",
-    "trigger": "Implement BFS",
-    "instructions": "Provide a code implementation of the Breadth-First Search algorithm in a programming language, including explanations of the code and example use cases."
-  },
-  {
-    "name": "5G and Beamforming Explanation",
-    "description": "Explaining 5G and beamforming technology",
-    "trigger": "Explain 5G and beamforming",
-    "instructions": "Provide a detailed explanation of 5G technology and beamforming, including how beamforming enhances data rates and its applications in 5G networks."
-  },
-  {
-    "name": "AI Agents Explanation",
-    "description": "Explaining AI agents and their types",
-    "trigger": "Explain AI agents",
-    "instructions": "Provide a detailed explanation of AI agents, including their components, types, and applications, as well as examples of how they are used in various industries."
-  },
-  {
-    "name": "Breadth-First Search (BFS) Algorithm",
-    "description": "A graph traversal algorithm that visits all the nodes in a graph level by level, starting from a given source node",
-    "trigger": "Graph traversal, finding shortest path, web crawlers",
-    "instructions": "Choose a source node, create a queue, enqueue the source node, mark the source node as visited, and then repeatedly dequeue a node, visit its unvisited neighbors, and mark them as visited"
-  },
-  {
-    "name": "5G Beamforming",
-    "description": "A signal processing technique that directs a focused radio signal towards a specific user device to enhance data rates",
-    "trigger": "5G technology, wireless communication, data rate enhancement",
-    "instructions": "Use a Massive MIMO antenna to create a narrow beam of radio frequency energy, reducing interference and increasing signal strength"
-  },
-  {
-    "name": "AI Agent",
-    "description": "An autonomous entity that perceives its environment and acts upon it to achieve specific objectives",
-    "trigger": "Artificial intelligence, machine learning, autonomous systems",
-    "instructions": "Design an agent with perception, reasoning, action, and learning capabilities to achieve goals in a dynamic environment"
-  },
-  {
-    "name": "5G Service Types",
-    "description": "Three main service types of 5G technology: eMBB, URLLC, and mMTC",
-    "trigger": "5G technology, wireless communication, service types",
-    "instructions": "Understand the characteristics and applications of each service type: eMBB for high-speed data, URLLC for low-latency communications, and mMTC for massive IoT device connectivity"
+  
+  {
+    "name": "explain-algorithms-with-code",
+    "description": "Explains algorithms with code and provides a step-by-step process of how they work.",
+    "triggers": [
+      "explain algorithm",
+      "algorithm explanation",
+      "code explanation"
+    ],
+    "prompt_template": "# Explain the <ALGORITHM> algorithm and provide a step-by-step process of how it works. Include code snippets and examples.",
+    "input_variables": [
+      "algorithm"
+    ],
+    "examples": [
+      {
+        "input": "bfs",
+        "expected_behavior": "provide a detailed explanation of the BFS algorithm with code snippets"
+      },
+      {
+        "input": "sliding window protocol",
+        "expected_behavior": "explain the sliding window protocol with a step-by-step process and code examples"
+      }
+    ],
+    "confidence": 0.8
+  },
+  {
+    "name": "describe-technical-concepts",
+    "description": "Describes technical concepts and provides key features and characteristics.",
+    "triggers": [
+      "explain concept",
+      "technical explanation",
+      "describe technology"
+    ],
+    "prompt_template": "# Describe the <CONCEPT> and provide its key features and characteristics.",
+    "input_variables": [
+      "concept"
+    ],
+    "examples": [
+      {
+        "input": "5g",
+        "expected_behavior": "provide a detailed explanation of 5G technology and its key features"
+      },
+      {
+        "input": "prometheus monitoring",
+        "expected_behavior": "explain the Prometheus monitoring system and its key characteristics"
+      }
+    ],
+    "confidence": 0.7
+  },
+  {
+    "name": "explain-technologies-with-examples",
+    "description": "Explains technologies and provides examples of how they work.",
+    "triggers": [
+      "explain technology",
+      "technology examples",
+      "how it works"
+    ],
+    "prompt_template": "# Explain the <TECHNOLOGY> and provide examples of how it works.",
+    "input_variables": [
+      "technology"
+    ],
+    "examples": [
+      {
+        "input": "ai agents",
+        "expected_behavior": "explain AI agents and provide examples of how they work"
+      },
+      {
+        "input": "grafana",
+        "expected_behavior": "explain the Grafana platform and provide examples of its key features"
+      }
+    ],
+    "confidence": 0.6
   }
 ]
