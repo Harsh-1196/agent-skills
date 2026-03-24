@@ -20,7 +20,7 @@ const AIIdentityPanel: React.FC = () => {
       </div>
       <div>
         <h1 className="text-2xl font-bold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-primary-accent)] to-cyan-200 neon-text-cyan uppercase">
-          Chanakya AI
+          Kaushal AI
         </h1>
         <p className="text-xs text-[var(--color-text-soft)]/70 tracking-wider">
           SELF-LEARNING INTELLIGENCE SYSTEM
