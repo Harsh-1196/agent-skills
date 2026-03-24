@@ -35,7 +35,7 @@ const Sidebar = () => {
             <div className="w-5 h-5 bg-white rounded-sm rotate-45" />
           </div>
           <div>
-            <h2 className="font-heading font-bold text-xl leading-tight">Kaushal AI</h2>
+            <h2 className="font-heading font-bold text-xl leading-tight">Skill-Sync</h2>
             <p className="text-[10px] text-primary-blue font-bold tracking-widest uppercase opacity-80">AI Intelligence Layer</p>
           </div>
         </div>

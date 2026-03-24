@@ -3,27 +3,18 @@ import Sidebar from './components/Sidebar';
 import ChatArea from './components/ChatArea';
 import type { Message as ChatMessage } from './components/ChatArea';
 import AnalysisPanel from './components/AnalysisPanel';
-import type { SkillMatch } from './components/AnalysisPanel';
-import FloatingPill from './components/FloatingPill';
-import type { TopMatch } from './components/FloatingPill';
-import { extractKeywords } from './utils/keywords';
 
 function App() {
   const [messages, setMessages] = useState<ChatMessage[]>([
     { 
       id: 1, 
       sender: 'ai', 
-      text: 'Initializing neural handshake...\n\nWelcome to the Kaushal AI Monolith. I am currently operating at 92% match capacity for your current context. How shall we proceed with the data synthesis?', 
+      text: 'Initializing neural handshake...\n\nWelcome to the Skill-Sync Monolith. I am currently operating at 92% match capacity for your current context. How shall we proceed with the data synthesis?', 
       timestamp: 'NOW',
       skills: ['Core_Logic']
     }
   ]);
   const [isTyping, setIsTyping] = useState(false);
-
-  // ✨ New state for skill matching features
-  const [topMatch, setTopMatch] = useState<TopMatch | null>(null);
-  const [skillMatches, setSkillMatches] = useState<SkillMatch[]>([]);
-  const [keywords, setKeywords] = useState<string[]>([]);
 
   const formatTimestamp = () => {
     const now = new Date();
@@ -31,14 +22,6 @@ function App() {
   };
 
   const handleSendMessage = useCallback(async (text: string) => {
-    // Reset skill match state on new query
-    setTopMatch(null);
-    setSkillMatches([]);
-
-    // Extract keywords immediately (synchronous)
-    const extractedKeywords = extractKeywords(text);
-    setKeywords(extractedKeywords);
-
     const userMsg: ChatMessage = { 
       id: Date.now(), 
       sender: 'user', 
@@ -85,23 +68,11 @@ function App() {
               if (chunkStr.startsWith('data: ')) {
                 try {
                   const data = JSON.parse(chunkStr.substring(6));
-                  
-                  // Handle skill match events
-                  if (data.type === 'skill_match') {
-                    setTopMatch({ skill: data.skill, score: data.score });
-                  } else if (data.type === 'skill_matches') {
-                    setSkillMatches(data.matches.map((m: any) => ({
-                      skill: m.skill,
-                      score: m.score
-                    })));
-                  } else if (data.chunk !== undefined) {
-                    // Normal text chunk
-                    setMessages(prev => prev.map(msg => 
-                      msg.id === aiMessageId ? { ...msg, text: msg.text + data.chunk } : msg
-                    ));
-                  }
+                  setMessages(prev => prev.map(msg => 
+                    msg.id === aiMessageId ? { ...msg, text: msg.text + data.chunk } : msg
+                  ));
                 } catch (e) {
-                  // Ignore JSON parse errors
+                  // Ignore JSON parse errors natively
                 }
               }
               boundary = buffer.indexOf('\n\n');
@@ -128,11 +99,7 @@ function App() {
         isTyping={isTyping} 
         onSendMessage={handleSendMessage} 
       />
-      <AnalysisPanel 
-        keywords={keywords}
-        skillMatches={skillMatches}
-      />
-      <FloatingPill topMatch={topMatch} />
+      <AnalysisPanel />
     </div>
   );
 }
