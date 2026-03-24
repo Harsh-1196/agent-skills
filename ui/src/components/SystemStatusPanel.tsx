@@ -13,7 +13,7 @@ const SystemStatusPanel: React.FC = () => {
       <div className="flex items-center gap-2">
         <Database className="w-4 h-4 text-cyan-400" />
         <span className="text-gray-400">Model:</span>
-        <span className="text-cyan-300 font-mono">Kaushal AI-v4 (Gemini Core)</span>
+        <span className="text-cyan-300 font-mono">Chanakya-v4 (Gemini Core)</span>
       </div>
       
       <div className="w-[1px] h-6 bg-cyan-900/50"></div>

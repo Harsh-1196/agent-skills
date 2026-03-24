@@ -106,7 +106,7 @@ if os.path.exists(ui_dir):
 
 if __name__ == "__main__":
     print("\n" + "="*50)
-    print("🚀 Starting Kaushal AI Unified Server...")
+    print("🚀 Starting Chanakya AI Unified Server...")
     print("👉 1. The Python LLM Backend is ACTIVE.")
     print("👉 2. The React Frontend is being SERVED.")
     print("🔗 OPEN THIS IN YOUR BROWSER: http://localhost:8000")
