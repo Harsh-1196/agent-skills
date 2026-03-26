@@ -6,7 +6,7 @@ const TopHeader: React.FC = () => {
     <header className="absolute top-0 left-0 right-0 h-16 w-full flex items-center justify-between px-8 z-20 font-mono bg-black/40 backdrop-blur-md border-b border-white/5">
       <div className="flex items-center gap-4 h-full">
         <div className="flex items-center gap-2">
-          <span className="text-[var(--color-primary-accent)] font-bold tracking-widest text-lg">Chanakya-AI</span>
+          <span className="text-[var(--color-primary-accent)] font-bold tracking-widest text-lg">Kaushal AI</span>
           <span className="text-gray-500 mx-2">|</span>
           <span className="text-gray-400 text-xs tracking-widest">CORE_INTERFACE</span>
         </div>
