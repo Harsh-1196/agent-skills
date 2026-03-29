@@ -65,11 +65,77 @@ async def get_active_skills():
         skill["_id"] = str(skill["_id"])
     return skills
 
-async def search_active_skills(embedding: list, limit: int = 3):
+import re as _re
+
+async def text_match_active_skills(query: str, limit: int = 3):
+    """
+    Fast text-based matching — no embedding needed.
+    Checks if the query closely matches any stored skill's name, trigger, or raw_query.
+    Returns results with a 0.99 score for exact matches, 0.95 for substring matches.
+    """
+    if not query or len(query.strip()) < 3:
+        return []
+
+    query_lower = query.strip().lower()
+    
+    # MongoDB case-insensitive regex search
+    escaped = _re.escape(query.strip())
+    regex_pattern = {"$regex": escaped, "$options": "i"}
+    
+    try:
+        cursor = active_skills_col.find({
+            "$or": [
+                {"name": regex_pattern},
+                {"trigger": regex_pattern},
+                {"raw_query": regex_pattern},
+            ]
+        }).limit(limit)
+        results = await cursor.to_list(length=limit)
+        
+        if not results:
+            return []
+        
+        matched = []
+        for skill in results:
+            # Determine score based on match quality
+            skill_name = (skill.get("name", "") or "").lower()
+            skill_trigger = (skill.get("trigger", "") or "").lower()
+            skill_raw_query = (skill.get("raw_query", "") or "").lower()
+            
+            if query_lower == skill_name or query_lower == skill_trigger or query_lower == skill_raw_query:
+                score = 0.99  # Exact match
+            elif query_lower in skill_raw_query or skill_raw_query in query_lower:
+                score = 0.96  # Close substring match
+            else:
+                score = 0.92  # Partial match
+            
+            matched.append({
+                "_id": str(skill["_id"]),
+                "name": skill.get("name", ""),
+                "description": skill.get("description", ""),
+                "trigger": skill.get("trigger", ""),
+                "instructions": skill.get("instructions", ""),
+                "score": score,
+            })
+        
+        matched.sort(key=lambda x: x["score"], reverse=True)
+        print(f"⚡ Text match found {len(matched)} results (instant, no embedding needed)")
+        for r in matched:
+            print(f"   - {r['name']} (score: {r['score']:.2f})")
+        return matched
+    except Exception as e:
+        print(f"⚠️ Text match failed: {e}")
+        return []
+
+# Minimum cosine similarity to consider a skill relevant
+VECTOR_MIN_SCORE = 0.25
+
+async def search_active_skills(embedding: list, limit: int = 3, query_text: str = ""):
     """
     Performs vector search on the active_skills collection.
     First tries Atlas $vectorSearch (requires index 'skills_vector_index').
-    Falls back to manual cosine similarity if Atlas index is unavailable.
+    Falls back to hybrid scoring (embedding cosine + text token overlap) if Atlas is unavailable.
+    Results below VECTOR_MIN_SCORE are discarded.
     """
     # --- Attempt 1: Atlas Vector Search ---
     pipeline = [
@@ -86,6 +152,9 @@ async def search_active_skills(embedding: list, limit: int = 3):
             "$project": {
                 "name": 1,
                 "description": 1,
+                "trigger": 1,
+                "instructions": 1,
+                "raw_query": 1,
                 "score": {"$meta": "vectorSearchScore"}
             }
         }
@@ -95,26 +164,30 @@ async def search_active_skills(embedding: list, limit: int = 3):
         cursor = active_skills_col.aggregate(pipeline)
         results = await cursor.to_list(length=limit)
         if results:
+            # Filter by minimum score
+            results = [r for r in results if r.get("score", 0) >= VECTOR_MIN_SCORE]
             for r in results:
                 r["_id"] = str(r["_id"])
-            print(f"✅ Atlas vector search returned {len(results)} results")
+            print(f"✅ Atlas vector search returned {len(results)} results (min_score={VECTOR_MIN_SCORE})")
             return results
         print("⚠️ Atlas vector search returned 0 results, trying fallback...")
     except Exception as e:
-        print(f"⚠️ Atlas vector search unavailable ({e}), using cosine fallback...")
+        print(f"⚠️ Atlas vector search unavailable ({e}), using hybrid fallback...")
 
-    # --- Attempt 2: Manual cosine similarity fallback ---
+    # --- Attempt 2: Hybrid fallback (embedding cosine + text token overlap) ---
     try:
-        cursor = active_skills_col.find({"embedding": {"$exists": True, "$ne": []}})
+        # Load ALL fields from every skill (not just embedding)
+        cursor = active_skills_col.find({})
         all_skills = await cursor.to_list(length=200)
         
         if not all_skills:
-            print("⚠️ No active skills with embeddings found")
+            print("⚠️ No active skills found")
             return []
         
         import math
+
         def cosine_sim(a, b):
-            if len(a) != len(b):
+            if not a or not b or len(a) != len(b):
                 return 0.0
             dot = sum(x * y for x, y in zip(a, b))
             mag_a = math.sqrt(sum(x * x for x in a))
@@ -122,25 +195,107 @@ async def search_active_skills(embedding: list, limit: int = 3):
             if mag_a == 0 or mag_b == 0:
                 return 0.0
             return dot / (mag_a * mag_b)
+
+        def _build_skill_text(skill: dict) -> str:
+            """Build a comprehensive searchable text from ALL skill fields."""
+            parts = [
+                skill.get("name", ""),
+                skill.get("description", ""),
+                skill.get("trigger", ""),
+                skill.get("instructions", ""),
+                skill.get("raw_query", ""),
+                skill.get("intent_core", ""),
+                skill.get("extracted_logic", ""),
+            ]
+            # Include examples if present
+            examples = skill.get("examples", [])
+            if isinstance(examples, list):
+                for ex in examples:
+                    if isinstance(ex, dict):
+                        parts.append(ex.get("input", ""))
+                        parts.append(ex.get("expected_behavior", ""))
+                    elif isinstance(ex, str):
+                        parts.append(ex)
+            return " ".join(p for p in parts if p)
+
+        def _token_overlap_score(query: str, skill_text: str) -> float:
+            """
+            Query-centric token overlap similarity.
+            Measures what fraction of the query's meaningful tokens appear in the skill text.
+            Returns a value between 0.0 and 1.0.
+            """
+            if not query or not skill_text:
+                return 0.0
+            
+            stop = {"a","an","the","is","it","of","in","to","and","or","for","on","with",
+                     "as","at","by","this","that","from","be","are","was","how","what",
+                     "me","my","i","you","we","can","do","does","not","no"}
+            
+            q_tokens = set(t for t in query.lower().split() if t not in stop and len(t) > 1)
+            s_tokens = set(t for t in skill_text.lower().split() if len(t) > 1)
+            
+            if not q_tokens:
+                return 0.0
+            
+            # Check exact substring match first (highest confidence)
+            query_lower = query.strip().lower()
+            skill_lower = skill_text.lower()
+            if query_lower in skill_lower:
+                return 0.98  # Query is contained verbatim in skill text
+            
+            matched = q_tokens & s_tokens
+            overlap = len(matched) / len(q_tokens)
+            
+            # Scale: 100% overlap → 0.95, 50% overlap → 0.47
+            return overlap * 0.95
+
+        query_lower = query_text.strip().lower() if query_text else ""
         
         scored = []
         for skill in all_skills:
-            score = cosine_sim(embedding, skill.get("embedding", []))
-            scored.append({
-                "_id": str(skill["_id"]),
-                "name": skill.get("name", ""),
-                "description": skill.get("description", ""),
-                "score": score
-            })
+            # Score 1: Embedding cosine similarity (if embedding exists)
+            emb_score = 0.0
+            skill_embedding = skill.get("embedding", [])
+            if skill_embedding and embedding:
+                emb_score = cosine_sim(embedding, skill_embedding)
+            
+            # Score 2: Text token overlap (uses ALL skill fields)
+            text_score = 0.0
+            if query_lower:
+                skill_text = _build_skill_text(skill)
+                text_score = _token_overlap_score(query_text, skill_text)
+            
+            # Take the BEST score from either method
+            final_score = max(emb_score, text_score)
+            
+            if final_score >= VECTOR_MIN_SCORE:
+                scored.append({
+                    "_id": str(skill["_id"]),
+                    "name": skill.get("name", ""),
+                    "description": skill.get("description", ""),
+                    "trigger": skill.get("trigger", ""),
+                    "instructions": skill.get("instructions", ""),
+                    "score": final_score,
+                    "_emb_score": round(emb_score, 4),
+                    "_text_score": round(text_score, 4),
+                })
         
         scored.sort(key=lambda x: x["score"], reverse=True)
         results = scored[:limit]
-        print(f"✅ Cosine fallback returned {len(results)} results")
+        print(f"✅ Hybrid fallback returned {len(results)} results (filtered by min_score={VECTOR_MIN_SCORE})")
         for r in results:
-            print(f"   - {r['name']} (score: {r['score']:.4f})")
+            print(f"   - {r['name']} (final: {r['score']:.4f} | emb: {r['_emb_score']} | text: {r['_text_score']})")
+        
+        # Clean internal debug fields before returning
+        for r in results:
+            r.pop("_emb_score", None)
+            r.pop("_text_score", None)
+        
         return results
     except Exception as e:
-        print(f"❌ Cosine fallback also failed: {e}")
+        print(f"❌ Hybrid fallback also failed: {e}")
+        import traceback
+        traceback.print_exc()
         return []
 
 async def promote_to_active(skill_data: dict):
