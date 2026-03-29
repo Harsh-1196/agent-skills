@@ -10,8 +10,10 @@ import json
 from llm_service import chat_stream, get_embedding
 from memory.interaction_logger import log_interaction
 from skills.observer import run_observer
-from skills.mongodb_store import candidates_col, promote_to_active, search_active_skills
+from skills.mongodb_store import candidates_col, promote_to_active, search_active_skills, text_match_active_skills
+from benchmarking.tracker import RequestBenchmark, generate_summary_report
 import asyncio
+import config
 
 app = FastAPI()
 
@@ -32,6 +34,7 @@ class PromotionRequest(BaseModel):
     description: str
     trigger: str
     instructions: str
+    raw_query: str = ""
 
 class SearchRequest(BaseModel):
     query: str
@@ -44,8 +47,13 @@ async def search_skills(request: SearchRequest):
         return {"matches": []}
     
     try:
-        query_embedding = get_embedding(query)
-        results = await search_active_skills(query_embedding, limit=3)
+        # Try fast text match first
+        results = await text_match_active_skills(query, limit=3)
+        if not results:
+            # Fall back to embedding + vector search
+            query_embedding = get_embedding(query)
+            results = await search_active_skills(query_embedding, limit=3, query_text=query)
+        
         matches = []
         for r in results:
             matches.append({
@@ -61,20 +69,39 @@ async def search_skills(request: SearchRequest):
 @app.post("/api/chat")
 async def chat_endpoint(request: ChatRequest):
     query = request.query
+    bench = RequestBenchmark(query=query, model=config.CHAT_MODEL)
     
     async def generate():
         full_response = ""
+        matched_skills = []
         
-        # 🔍 Vector search: embed query and find matching active skills
+        # 🔍 Step 1: Try fast text matching first (instant, no embedding API call)
         try:
-            print(f"🔍 Embedding query: '{query[:50]}...'")
-            query_embedding = get_embedding(query)
-            print(f"✅ Embedding generated ({len(query_embedding)} dimensions)")
-            
-            skill_results = await search_active_skills(query_embedding, limit=3)
-            print(f"🔍 Vector search returned {len(skill_results)} results")
+            bench.start_phase("text_match")
+            skill_results = await text_match_active_skills(query, limit=3)
+            bench.end_phase("text_match")
             
             if skill_results:
+                print(f"⚡ Fast text match found {len(skill_results)} results — skipping embedding")
+            else:
+                # Step 2: Fall back to embedding + vector search
+                print(f"🔍 No text match, generating embedding for: '{query[:50]}...'")
+                bench.start_phase("embedding")
+                query_embedding = get_embedding(query)
+                bench.end_phase("embedding")
+                print(f"✅ Embedding generated ({len(query_embedding)} dimensions)")
+                
+                bench.start_phase("vector_search")
+                skill_results = await search_active_skills(query_embedding, limit=3, query_text=query)
+                bench.end_phase("vector_search")
+            
+            print(f"🔍 Skill search returned {len(skill_results)} results")
+            
+            if skill_results:
+                matched_skills = skill_results
+                bench.set_skills_matched([{"skill": r.get("name", ""), "score": r.get("score", 0)} for r in skill_results])
+                bench.set_skills_injected(len(skill_results))
+                
                 for i, r in enumerate(skill_results):
                     print(f"   Match {i+1}: {r.get('name', '?')} (score: {r.get('score', 0):.3f})")
                 
@@ -86,16 +113,35 @@ async def chat_endpoint(request: ChatRequest):
                 matches = [{"skill": r.get("name", ""), "score": round(r.get("score", 0), 3)} for r in skill_results]
                 yield f"data: {json.dumps({'type': 'skill_matches', 'matches': matches})}\n\n"
             else:
-                print("⚠️ Vector search returned 0 results (no matching skills or index missing)")
+                print("⚠️ No matching skills found")
         except Exception as e:
-            print(f"❌ Skill vector search failed (non-blocking): {e}")
+            bench.end_phase("text_match")
+            bench.end_phase("embedding")
+            bench.end_phase("vector_search")
+            print(f"❌ Skill search failed (non-blocking): {e}")
             import traceback
             traceback.print_exc()
         
-        # 🧠 Skills are handled internally by gemini_llm -> skill_retriever -> mongodb_store
-        for chunk in chat_stream(query):
+        # 🧠 LLM generation with skill context
+        bench.start_phase("llm_generate")
+        for chunk in chat_stream(query, skills=matched_skills if matched_skills else None):
             full_response += chunk
             yield f"data: {json.dumps({'chunk': chunk})}\n\n"
+        bench.end_phase("llm_generate")
+        
+        # Finalize benchmark
+        bench.set_response(full_response)
+        bench_result = bench.finalize()
+        
+        # Emit benchmark data as final SSE event
+        safe_bench = {
+            "type": "benchmark",
+            "total_latency_ms": bench_result.get("total_latency_ms", 0),
+            "tokens": bench_result.get("tokens", {}),
+            "cost_usd": bench_result.get("cost_usd", 0),
+            "savings": bench_result.get("savings", {}),
+        }
+        yield f"data: {json.dumps(safe_bench)}\n\n"
             
         try:
             log_interaction(query, full_response)
@@ -105,6 +151,11 @@ async def chat_endpoint(request: ChatRequest):
             print(f"Background Observer error: {e}")
             
     return StreamingResponse(generate(), media_type="text/event-stream")
+
+@app.get("/api/benchmarks")
+async def get_benchmarks():
+    """Returns aggregate benchmark/savings summary."""
+    return generate_summary_report()
 
 @app.get("/api/patterns/candidates")
 async def get_candidates():
@@ -127,9 +178,13 @@ async def approve_pattern(request: PromotionRequest):
         "trigger": request.trigger,
         "instructions": request.instructions,
     }
-    # Optional: Get embedding for the new active skill if needed for later retrieval
+    # Embed only the semantic identifiers (not verbose instructions)
+    # This keeps the embedding focused so query-vs-skill similarity stays high
     from llm_service import get_embedding
-    skill_data["embedding"] = get_embedding(request.instructions)
+    embed_text = f"{request.trigger} {request.raw_query}".strip()
+    skill_data["embedding"] = get_embedding(embed_text)
+    # Store raw_query for fast text matching
+    skill_data["raw_query"] = request.raw_query
     
     await promote_to_active(skill_data)
     # Remove the candidate after promotion

@@ -21,7 +21,7 @@ Your goal is to produce clean, readable, and properly formatted text that respec
 """
 
 def build_prompt(user_input: str, skills: list = None) -> str:
-    skills_context = get_skills_context(skills)
+    skills_context = get_skills_context(query=user_input, skills=skills)
     return f"{FORMATTER_PROMPT}{skills_context}\n\nUser Input:\n{user_input}"
 
 # =========================
@@ -88,15 +88,29 @@ def chat_stream(messages: str, skills: list = None):
             yield f"\n\n[SYSTEM_ERROR]: {error_str}"
 
 # =========================
-# 🧬 EMBEDDING LOGIC (GEMINI)
+# 🧬 EMBEDDING LOGIC (GEMINI) — with in-memory cache
 # =========================
+_embedding_cache: dict[str, list] = {}
+_CACHE_MAX_SIZE = 200
+
 def get_embedding(text: str) -> list:
-    """Generates vector embeddings using Gemini."""
+    """Generates vector embeddings using Gemini, with in-memory cache."""
+    cache_key = text.strip().lower()
+    if cache_key in _embedding_cache:
+        return _embedding_cache[cache_key]
+    
     result = gemini_client.models.embed_content(
         model=config.EMBEDDING_MODEL,
         contents=text
     )
-    return result.embeddings[0].values
+    embedding = result.embeddings[0].values
+    
+    # Evict oldest if cache is full
+    if len(_embedding_cache) >= _CACHE_MAX_SIZE:
+        oldest_key = next(iter(_embedding_cache))
+        del _embedding_cache[oldest_key]
+    _embedding_cache[cache_key] = embedding
+    return embedding
 
 # =========================
 # 👁️ OBSERVER MODEL (FAST - GROQ)

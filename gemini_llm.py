@@ -52,7 +52,7 @@ Your goal is to produce clean, readable, and properly formatted text that respec
 """
 
 def build_prompt(user_input: str, skills: list = None) -> str:
-    skills_context = get_skills_context(skills)
+    skills_context = get_skills_context(query=user_input, skills=skills)
     return f"{FORMATTER_PROMPT}{skills_context}\n\nUser Input:\n{user_input}"
 
 
