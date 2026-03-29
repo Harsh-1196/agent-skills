@@ -1,68 +1,105 @@
-# Chanakya AI (Neural Monolith)
+# 🧬 Kaushal AI (The Neural Monolith)
 
-A next-generation, cyberpunk-styled dashboard powered by Adaptive Agent Skills. Chanakya AI features a stunning "Synapse Monolith" React interface over a blazing fast Python API, designed to dynamically learn, stream real-time responses, and extract reusable skills from user interactions.
+**Kaushal AI** is a state-of-the-art, cyberpunk-inspired neural monolith that bridges the gap between raw LLM intelligence and adaptive, skill-based automation. Built with a stunning interface and a high-performance Python backend, Kaushal AI dynamically learns from every interaction, distilling complex patterns into reusable "skills."
 
-## Features
+---
 
-- **Holographic Neural UI**: A deeply satisfying, cyberpunk-themed React (Vite) interface complete with animated particle networks and immersive typewriter streaming effects.
-- **Server-Sent Events (SSE) Streaming**: Connects seamlessly to the FastAPI backend to stream Gemini LLM tokens in real-time, simulating an authentic terminal intelligence.
-- **Interaction Memory Base**: Automatically logs the entire chat history in a structured `.jsonl` format behind the scenes.
-- **Dynamic Skill Extraction**: Analyzes recent chat history and distills recognized patterns into reusable JSON "skills" (including triggers, instructions, and descriptions).
-- **Google GenAI Support**: Uses the latest `google-genai` SDK with custom personality prompts for clean, beautiful formatting.
+## ✨ Key Features
 
-## Project Structure
+### 🧠 Adaptive Skill Extraction
+The "Observer" logic continuously monitors chat history to identify repeatable workflows:
+- **Pattern Recognition**: Automatically distills user intents into structured JSON skills.
+- **Vector Search**: Uses high-dimensional embeddings (via Gemini) to match queries with active skills.
+- **Human-in-the-Loop**: An intuitive analysis panel for approving and refining extracted skills.
 
-```text
-agent-skills/
-├── api.py                           # Unified FastAPI server (Backend + serves UI)
-├── main.py                          # Legacy terminal chat loop
-├── config.py                        # Model configuration settings
-├── .env                             # Environment variables (API keys)
-├── gemini_llm.py                    # Google Gemini streaming integration
-├── memory/
-│   └── interaction_logger.py        # Module for logging & loading interactions
-├── skills/
-│   ├── skills_extractor.py          # LLM-based logic to extract skills
-│   └── skill_store.py               # Persists and loads `.json` skills
-├── ui/                              # The React + Vite neo-terminal frontend
-└── data/                            # Auto-generated runtime data
-    ├── interactions.jsonl           
-    └── skills.json                  
+### ⚡ Real-Time SSE Engine
+Powered by **FastAPI**, the backend leverages Server-Sent Events (SSE) to stream:
+- **Token-by-Token Responses**: Direct from Gemini LLMs.
+- **Metadata Payloads**: Real-time skill matching scores and system status.
+- **Persistence**: Interaction logs captured in high-performance `.jsonl` format.
+
+---
+
+## 🏗️ Architecture
+
+```mermaid
+graph TD
+    User((User)) <--> UI[React Synapse Dashboard]
+    UI <--> API[FastAPI Gateway]
+    API <--> LLM[Gemini LLM Service]
+    API <--> Memory[(Interaction Logs .jsonl)]
+    API <--> Skills[(Skill Store .json)]
+    API <--> Observer[Skill Extraction Observer]
+    Observer --> Skills
 ```
 
-## Prerequisites
+---
 
-- Python 3.12+
-- Node.js & npm (for building the UI)
+## 🚀 Getting Started
 
-## Installation
+### Prerequisites
+- **Python 3.12+**
+- **Node.js 20+**
+- **MongoDB** (for advanced skill persistence)
 
-1. Clone or download the repository to your local machine.
-2. Configure your API keys in a `.env` file in the root directory:
-   ```env
-   GEMINI_API_KEY=your_gemini_api_key_here
-   ```
-3. Install the Python dependencies:
+### Installation
+
+1. **Clone the Repository**
    ```bash
-   pip install fastapi uvicorn google-genai openai python-dotenv pydantic
+   git clone https://github.com/your-repo/kaushal-ai.git
+   cd kaushal-ai
    ```
-4. Build the React UI (if making dev changes):
+
+2. **Backend Setup**
+   ```bash
+   cd agent-skills
+   pip install -r requirements.txt
+   ```
+   *Create a `.env` file:*
+   ```env
+   GEMINI_API_KEY=your_key_here
+   ```
+
+3. **Frontend Setup**
    ```bash
    cd ui
    npm install
    npm run build
-   cd ..
    ```
 
-## Usage
+### 🏃 Running the Monolith
 
-Start the unified backend + frontend server:
-
+Start the unified server from the `agent-skills` directory:
 ```bash
 python3 api.py
 ```
+Open [http://localhost:8000](http://localhost:8000) to enter the neural handshake.
 
-1. Open your browser and navigate to **http://localhost:8000**
-2. You will be greeted by the `NEURAL_MONOLITH` dashboard.
-3. Type your query into the terminal input at the bottom and watch the intelligence stream back with human-like typewriter delays!
-4. Behind the scenes, the agent will learn new skills and log them into `data/skills.json`.
+---
+
+## 📂 Project Structure
+
+```text
+.
+├── agent-skills/              # Backend Core & API
+│   ├── api.py                 # Unified FastAPI Gateway
+│   ├── config.py              # Global settings and LLM configuration
+│   ├── llm_service.py         # Gemini / LLM & Embedding Integration
+│   ├── main.py                # Legacy CLI interface
+│   ├── skills/                # Core Skill Logic (Extraction & Store)
+│   ├── retrieval/             # Advanced Skill Search & Vector Retrieval
+│   ├── memory/                # Interaction Logging & History
+│   ├── benchmarking/          # Performance & Accuracy Tracking
+│   ├── data/                  # Local persistence (JSONL/JSON)
+│   └── ui/                    # React Frontend (Vite)
+│       ├── src/               # UI components, state, and styles
+│       ├── public/            # Static assets and icons
+│       └── dist/              # Production optimized build
+├── repository_overview.md     # Comprehensive architecture deep-dive
+└── README.md                  # Project root overview
+```
+
+
+<div align="center">
+  <sub>Built with ❤️ by the Kaushal AI Team</sub>
+</div>
