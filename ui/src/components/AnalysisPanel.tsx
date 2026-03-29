@@ -92,9 +92,10 @@ const AnalysisPanel = ({ keywords = [], skillMatches = [] }: AnalysisPanelProps)
         body: JSON.stringify({
           candidate_id: candidate._id,
           name: candidate.intent_core,
-          description: candidate.extracted_logic || candidate.raw_query,
-          trigger: candidate.intent_core.split(' ')[0],
-          instructions: candidate.extracted_logic
+          description: candidate.intent_core + (candidate.extracted_logic ? '. ' + candidate.extracted_logic : ''),
+          trigger: candidate.intent_core,
+          instructions: candidate.extracted_logic || candidate.intent_core,
+          raw_query: candidate.raw_query || ''
         })
       });
       fetchCandidates();
