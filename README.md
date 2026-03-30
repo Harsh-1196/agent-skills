@@ -1,81 +1,46 @@
-# 🧬 Kaushal AI (The Neural Monolith)
+# Kaushal AI
 
-**Kaushal AI** is a state-of-the-art, cyberpunk-inspired neural monolith that bridges the gap between raw LLM intelligence and adaptive, skill-based automation. Built with a stunning interface and a high-performance Python backend, Kaushal AI dynamically learns from every interaction, distilling complex patterns into reusable "skills."
+Kaushal AI is an adaptive, agentic AI assistant designed to continuously learn and evolve from user interactions. Built with a robust FastAPI backend and a responsive React frontend, the system dynamically observes chat conversations, extracts recurring workflows or patterns, and queues them for human approval. Once approved, these highly specialized "skills" are stored in MongoDB.
 
----
+During subsequent conversations, Kaushal AI uses a blazingly fast hybrid search mechanism—attempting a text match first, dynamically falling back to an LLM-based vector semantic search—to inject relevant capabilities into its generative context, effectively answering queries with learned expertise through Server-Sent Events (SSE) streaming.
 
-## ✨ Key Features
+## 🌟 Features
 
-### 🧠 Adaptive Skill Extraction
-The "Observer" logic continuously monitors chat history to identify repeatable workflows:
-- **Pattern Recognition**: Automatically distills user intents into structured JSON skills.
-- **Vector Search**: Uses high-dimensional embeddings (via Gemini) to match queries with active skills.
-- **Human-in-the-Loop**: An intuitive analysis panel for approving and refining extracted skills.
-
-### ⚡ Real-Time SSE Engine
-Powered by **FastAPI**, the backend leverages Server-Sent Events (SSE) to stream:
-- **Token-by-Token Responses**: Direct from Gemini LLMs.
-- **Metadata Payloads**: Real-time skill matching scores and system status.
-- **Persistence**: Interaction logs captured in high-performance `.jsonl` format.
-
----
+- **Hybrid Skill Retrieval:** Real-time search pipeline that implements deterministic text matching with a rapid fallback to embedding-based vector search for conceptual matching.
+- **Continuous Learning Loop:** An asynchronous background Observer analyzes interaction logs and extracts structural candidates into an extraction queue without blocking the main event stream.
+- **Queue Management UI:** A dedicated interface to review extracted skill candidates, allowing users to promote them to Active Skills or ignore them.
+- **Server-Sent Events (SSE):** True real-time streaming of LLM tokens, skill matching events, and benchmarking data directly to the frontend.
+- **Unified Architecture:** A single FastAPI server that acts as the backend api and serves the pre-built React frontend assets.
+- **Performance Benchmarking:** Real-time telemetry tracking query latency, phase durations (text match, vector search, LLM generation), and cost evaluation.
 
 ## 🏗️ Architecture
 
 ```mermaid
 graph TD
-    User((User)) <--> UI[React Synapse Dashboard]
-    UI <--> API[FastAPI Gateway]
-    API <--> LLM[Gemini LLM Service]
-    API <--> Memory[(Interaction Logs .jsonl)]
-    API <--> Skills[(Skill Store .json)]
-    API <--> Observer[Skill Extraction Observer]
-    Observer --> Skills
+    User([User]) <-->|Chat & Admin| UI[React UI]
+    
+    UI <-->|API Calls & SSE| API[FastAPI Backend]
+    
+    subgraph Retrieval Pipeline
+        API -->|Incoming Query| Search[Hybrid Search]
+        Search -->|1. Fast Text Match| ActiveDB[(MongoDB: Active Skills)]
+        Search -.-x|2. Fallback: Embeddings| Embed[Embedding Model]
+        Embed -->|Vector Search| ActiveDB
+        Search -->|Skill Context| LLM[LLM Generation]
+    end
+    
+    LLM -->|Stream Response| API
+    
+    subgraph Learning Pipeline
+        API -.->|Async Trigger| Observer[Background Observer]
+        Observer -->|Extract Patterns| Pipeline[Retrieval & Formatting]
+        Pipeline -->|Store Candidates| CandidateDB[(MongoDB: Candidate Queue)]
+    end
+    
+    UI -->|Approve/Ignore| QueueManager[Queue API]
+    QueueManager --> CandidateDB
+    CandidateDB -.->|On Approve| ActiveDB
 ```
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-- **Python 3.12+**
-- **Node.js 20+**
-- **MongoDB** (for advanced skill persistence)
-
-### Installation
-
-1. **Clone the Repository**
-   ```bash
-   git clone https://github.com/your-repo/kaushal-ai.git
-   cd kaushal-ai
-   ```
-
-2. **Backend Setup**
-   ```bash
-   cd agent-skills
-   pip install -r requirements.txt
-   ```
-   *Create a `.env` file:*
-   ```env
-   GEMINI_API_KEY=your_key_here
-   ```
-
-3. **Frontend Setup**
-   ```bash
-   cd ui
-   npm install
-   npm run build
-   ```
-
-### 🏃 Running the Monolith
-
-Start the unified server from the `agent-skills` directory:
-```bash
-python3 api.py
-```
-Open [http://localhost:8000](http://localhost:8000) to enter the neural handshake.
-
----
 
 ## 📂 Project Structure
 
@@ -98,6 +63,61 @@ Open [http://localhost:8000](http://localhost:8000) to enter the neural handshak
 ├── repository_overview.md     # Comprehensive architecture deep-dive
 └── README.md                  # Project root overview
 ```
+
+
+## 🚀 Installation & Setup
+
+### Prerequisites
+
+- Python 3.12+
+- Node.js & npm (for UI development)
+- MongoDB instance (Local or Atlas)
+
+### 1. Clone & Configure
+
+Clone the repository and create an `.env` file in the root directory with your API keys and MongoDB connection string:
+
+```env
+# Example .env configuration
+GROQ_API_KEY=your_groq_api_key
+GEMINI_API_KEY=your_gemini_api_key
+MONGO_URI=mongodb://localhost:27017
+```
+
+### 2. Install Backend Dependencies
+
+Set up a virtual environment and install the required Python packages:
+
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows use: venv\Scripts\activate
+pip install -r requirements.txt
+```
+*(If `requirements.txt` is incomplete, ensure you install `fastapi`, `uvicorn`, `pydantic`, `motor`, `pymongo`, etc.)*
+
+### 3. Build the Frontend
+
+Navigate to the UI directory to install dependencies and build the static assets:
+
+```bash
+cd ui
+npm install
+npm run build
+cd ..
+```
+
+### 4. Run the Unified Server
+
+Start the FastAPI application which serves both the API and the React frontend:
+
+```bash
+python api.py
+```
+
+1. Open your browser and navigate to **http://localhost:8000**
+2. You will be greeted by Kaushal AI dashboard.
+3. Type your query into the terminal input at the bottom and watch the intelligence stream back with human-like typewriter delays!
+4. Behind the scenes, the agent will learn new skills and log them into `data/skills.json`.
 
 
 <div align="center">
