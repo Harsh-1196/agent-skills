@@ -1,0 +1,65 @@
+{
+  "timestamp": "2026-11-08 13:53:13",
+  "model": "openai/gpt-oss-20b",
+  "sample_size": 5,
+  "success_rate": 1.0,
+  "latency_ms": {
+    "mean": 1449.04963998124,
+    "median": 1498.6625000019558,
+    "p95": 1747.106239979621,
+    "min": 1143.9539999701083,
+    "max": 1808.155499980785
+  },
+  "runs": [
+    {
+      "id": 1,
+      "candidate_id": "6af0316c17eddbb62b059357",
+      "latency_ms": 1808.16,
+      "intent_core": "Code Refactoring",
+      "extracted_logic": "If user requests refactoring, replace loops with list comprehensions, delete comments, and ensure functions are pure.",
+      "has_embedding": true,
+      "embedding_dim": 3072,
+      "success": true
+    },
+    {
+      "id": 2,
+      "candidate_id": "6af0316d17eddbb62b059358",
+      "latency_ms": 1143.95,
+      "intent_core": "Format database query output into a markdown table",
+      "extracted_logic": "Convert input data rows into a markdown table with specified columns ID, Name, and Status, each row prefixed by a pipe and columns separated by pipes.",
+      "has_embedding": true,
+      "embedding_dim": 3072,
+      "success": true
+    },
+    {
+      "id": 3,
+      "candidate_id": "6af0316e17eddbb62b059359",
+      "latency_ms": 1498.66,
+      "intent_core": "Generate shell command",
+      "extracted_logic": "If user requests a one-liner to delete files matching a pattern older than N days, output a find command with -name, -mtime +N, and -delete.",
+      "has_embedding": true,
+      "embedding_dim": 3072,
+      "success": true
+    },
+    {
+      "id": 4,
+      "candidate_id": "6af0317017eddbb62b05935a",
+      "latency_ms": 1291.57,
+      "intent_core": "Summarization into bullet points",
+      "extracted_logic": "If user requests a summary, produce the specified number of bullet points, each not exceeding the word limit.",
+      "has_embedding": true,
+      "embedding_dim": 3072,
+      "success": true
+    },
+    {
+      "id": 5,
+      "candidate_id": "6af0317117eddbb62b05935b",
+      "latency_ms": 1502.91,
+      "intent_core": "Convert JSON to TypeScript interfaces",
+      "extracted_logic": "Map JSON keys to TypeScript interface properties, converting to camelCase and inferring appropriate types.",
+      "has_embedding": true,
+      "embedding_dim": 3072,
+      "success": true
+    }
+  ]
+}

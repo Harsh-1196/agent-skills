@@ -1,0 +1,96 @@
+{
+  "timestamp": "2026-11-08 14:05:30",
+  "base_url": "http://127.0.0.1:8008",
+  "results": {
+    "search_c1": {
+      "count": 30,
+      "concurrency": 1,
+      "successful": 30,
+      "errors": 0,
+      "error_rate_pct": 0.0,
+      "total_duration_s": 0.17,
+      "throughput_req_per_sec": 178.3,
+      "latency_ms": {
+        "mean": 5.56794666335918,
+        "median": 5.511149967787787,
+        "p90": 6.590249994769692,
+        "p95": 6.748079971293918,
+        "p99": 7.17969098535832,
+        "min": 4.260900022927672,
+        "max": 7.307899999432266
+      }
+    },
+    "search_c5": {
+      "count": 30,
+      "concurrency": 5,
+      "successful": 30,
+      "errors": 0,
+      "error_rate_pct": 0.0,
+      "total_duration_s": 0.1,
+      "throughput_req_per_sec": 294.47,
+      "latency_ms": {
+        "mean": 15.976786667791506,
+        "median": 14.1390000062529,
+        "p90": 24.212920007994402,
+        "p95": 28.322245011804615,
+        "p99": 31.496559020015415,
+        "min": 7.915300026070327,
+        "max": 32.207900017965585
+      }
+    },
+    "search_c10": {
+      "count": 30,
+      "concurrency": 10,
+      "successful": 30,
+      "errors": 0,
+      "error_rate_pct": 0.0,
+      "total_duration_s": 0.19,
+      "throughput_req_per_sec": 160.71,
+      "latency_ms": {
+        "mean": 59.464910003589466,
+        "median": 28.692349995253608,
+        "p90": 132.1773600182496,
+        "p95": 133.2301400077995,
+        "p99": 133.64967803179752,
+        "min": 11.598699958994985,
+        "max": 133.66760005010292
+      }
+    },
+    "candidates_c5": {
+      "count": 30,
+      "concurrency": 5,
+      "successful": 30,
+      "errors": 0,
+      "error_rate_pct": 0.0,
+      "total_duration_s": 0.11,
+      "throughput_req_per_sec": 277.71,
+      "latency_ms": {
+        "mean": 16.873203332458313,
+        "median": 16.456600016681477,
+        "p90": 21.677400002954535,
+        "p95": 26.01626000832766,
+        "p99": 26.499841015902348,
+        "min": 9.055000031366944,
+        "max": 26.551200018730015
+      }
+    },
+    "benchmarks_c5": {
+      "count": 30,
+      "concurrency": 5,
+      "successful": 30,
+      "errors": 0,
+      "error_rate_pct": 0.0,
+      "total_duration_s": 0.06,
+      "throughput_req_per_sec": 502.89,
+      "latency_ms": {
+        "mean": 8.979656665663546,
+        "median": 7.407149998471141,
+        "p90": 12.674910027999443,
+        "p95": 21.82714000809937,
+        "p99": 24.27617800189182,
+        "min": 3.6673000431619585,
+        "max": 24.737800005823374
+      }
+    }
+  }
+}

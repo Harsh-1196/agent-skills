@@ -1,0 +1,35 @@
+{
+  "timestamp": "2026-11-08 13:54:33",
+  "runs_count": 5,
+  "build_duration_seconds": {
+    "mean": 6.072827879991382,
+    "median": 5.747590499988291,
+    "p95": 6.893092159985099,
+    "min": 5.570981199969538,
+    "max": 7.052958199987188
+  },
+  "bundle_totals": {
+    "total_raw_bytes": 409885,
+    "total_raw_kb": 400.28,
+    "total_gzip_bytes": 121220,
+    "total_gzip_kb": 118.38
+  },
+  "bundle_artifacts": [
+    {
+      "file": "index-DFxR2eIj.css",
+      "type": "stylesheet",
+      "raw_bytes": 51355,
+      "raw_kb": 50.15,
+      "gzip_bytes": 8715,
+      "gzip_kb": 8.51
+    },
+    {
+      "file": "index-Jxt4g03K.js",
+      "type": "javascript",
+      "raw_bytes": 358530,
+      "raw_kb": 350.13,
+      "gzip_bytes": 112505,
+      "gzip_kb": 109.87
+    }
+  ]
+}

@@ -1,0 +1,540 @@
+{
+  "timestamp": "2026-11-08 14:13:25",
+  "total_queries": 40,
+  "total_executions": 400,
+  "in_domain_count": 30,
+  "out_of_domain_count": 10,
+  "latency_stats_ms": {
+    "sample_size": 400,
+    "mean": 0.5753512497176416,
+    "median": 0.47125000855885446,
+    "p95": 0.9890500165056434,
+    "min": 0.22200000239536166,
+    "max": 2.3796000168658793
+  },
+  "accuracy_metrics": {
+    "recall_at_1": 0.4666666666666667,
+    "recall_at_3": 0.4666666666666667,
+    "mrr": 0.4666666666666667,
+    "precision_at_1": 0.4666666666666667,
+    "out_of_domain_rejection_rate": 1.0
+  },
+  "token_efficiency": {
+    "full_dump_baseline_tokens": 471,
+    "avg_injected_tokens": 17.6,
+    "avg_token_reduction_pct": 96.26326963906583,
+    "p95_injected_tokens": 55.0
+  },
+  "per_query_details": [
+    {
+      "id": 1,
+      "query": "Can you explain Dijkstra's algorithm and show me how to implement it in Python?",
+      "category": "algorithm",
+      "expected_skill": "explain-algorithms-with-code",
+      "matched_skills": [],
+      "latency_p50_ms": 0.4880499909631908,
+      "latency_p95_ms": 0.7650199986528605,
+      "injected_tokens": 0,
+      "saved_tokens_pct": 100.0
+    },
+    {
+      "id": 2,
+      "query": "How does merge sort work? Provide code snippets and step by step walk through.",
+      "category": "algorithm",
+      "expected_skill": "explain-algorithms-with-code",
+      "matched_skills": [
+        {
+          "name": "explain-algorithms-with-code",
+          "score": 0.3161
+        }
+      ],
+      "latency_p50_ms": 0.6779000104870647,
+      "latency_p95_ms": 1.0111400304595008,
+      "injected_tokens": 55,
+      "saved_tokens_pct": 88.32271762208069
+    },
+    {
+      "id": 3,
+      "query": "Explain binary search tree insertion with sample code.",
+      "category": "algorithm",
+      "expected_skill": "explain-algorithms-with-code",
+      "matched_skills": [],
+      "latency_p50_ms": 0.37579998024739325,
+      "latency_p95_ms": 0.7434050086885688,
+      "injected_tokens": 0,
+      "saved_tokens_pct": 100.0
+    },
+    {
+      "id": 4,
+      "query": "Explain the sliding window algorithm with an example in C++.",
+      "category": "algorithm",
+      "expected_skill": "explain-algorithms-with-code",
+      "matched_skills": [
+        {
+          "name": "explain-algorithms-with-code",
+          "score": 0.33
+        }
+      ],
+      "latency_p50_ms": 0.4561500099953264,
+      "latency_p95_ms": 0.6129850138677283,
+      "injected_tokens": 54,
+      "saved_tokens_pct": 88.53503184713377
+    },
+    {
+      "id": 5,
+      "query": "Explain dynamic programming memoization with the Fibonacci sequence in code.",
+      "category": "algorithm",
+      "expected_skill": "explain-algorithms-with-code",
+      "matched_skills": [],
+      "latency_p50_ms": 0.42805002885870636,
+      "latency_p95_ms": 0.8061399887083096,
+      "injected_tokens": 0,
+      "saved_tokens_pct": 100.0
+    },
+    {
+      "id": 6,
+      "query": "How does Kadane's algorithm work for maximum subarray? Give code explanation.",
+      "category": "algorithm",
+      "expected_skill": "explain-algorithms-with-code",
+      "matched_skills": [
+        {
+          "name": "explain-algorithms-with-code",
+          "score": 0.2557
+        }
+      ],
+      "latency_p50_ms": 0.4802999901585281,
+      "latency_p95_ms": 0.5895300244446843,
+      "injected_tokens": 55,
+      "saved_tokens_pct": 88.32271762208069
+    },
+    {
+      "id": 7,
+      "query": "Can you explain breadth first search BFS traversal on a graph with code?",
+      "category": "algorithm",
+      "expected_skill": "explain-algorithms-with-code",
+      "matched_skills": [
+        {
+          "name": "explain-algorithms-with-code",
+          "score": 0.1767
+        }
+      ],
+      "latency_p50_ms": 0.5502999993041158,
+      "latency_p95_ms": 0.6825449847383425,
+      "injected_tokens": 55,
+      "saved_tokens_pct": 88.32271762208069
+    },
+    {
+      "id": 8,
+      "query": "Walk me through depth first search DFS recursive algorithm with implementation.",
+      "category": "algorithm",
+      "expected_skill": "explain-algorithms-with-code",
+      "matched_skills": [],
+      "latency_p50_ms": 0.4250499769113958,
+      "latency_p95_ms": 0.5921099887927992,
+      "injected_tokens": 0,
+      "saved_tokens_pct": 100.0
+    },
+    {
+      "id": 9,
+      "query": "Explain quicksort partitioning step by step with code examples.",
+      "category": "algorithm",
+      "expected_skill": "explain-algorithms-with-code",
+      "matched_skills": [
+        {
+          "name": "explain-algorithms-with-code",
+          "score": 0.3382
+        }
+      ],
+      "latency_p50_ms": 0.46209999709390104,
+      "latency_p95_ms": 0.5436850216938183,
+      "injected_tokens": 55,
+      "saved_tokens_pct": 88.32271762208069
+    },
+    {
+      "id": 10,
+      "query": "Show me the two pointer approach for reversing an array with code and explanation.",
+      "category": "algorithm",
+      "expected_skill": "explain-algorithms-with-code",
+      "matched_skills": [],
+      "latency_p50_ms": 0.43459999142214656,
+      "latency_p95_ms": 0.7146650023059918,
+      "injected_tokens": 0,
+      "saved_tokens_pct": 100.0
+    },
+    {
+      "id": 11,
+      "query": "Explain Bellman-Ford shortest path algorithm with code snippets.",
+      "category": "algorithm",
+      "expected_skill": "explain-algorithms-with-code",
+      "matched_skills": [
+        {
+          "name": "explain-algorithms-with-code",
+          "score": 0.2697
+        }
+      ],
+      "latency_p50_ms": 0.3679999790620059,
+      "latency_p95_ms": 0.47451503342017526,
+      "injected_tokens": 55,
+      "saved_tokens_pct": 88.32271762208069
+    },
+    {
+      "id": 12,
+      "query": "How does A* search algorithm work? Include step by step process and code.",
+      "category": "algorithm",
+      "expected_skill": "explain-algorithms-with-code",
+      "matched_skills": [
+        {
+          "name": "explain-algorithms-with-code",
+          "score": 0.522
+        }
+      ],
+      "latency_p50_ms": 0.36150001687929034,
+      "latency_p95_ms": 0.44814997527282674,
+      "injected_tokens": 55,
+      "saved_tokens_pct": 88.32271762208069
+    },
+    {
+      "id": 13,
+      "query": "Explain Topological Sort on directed acyclic graph with Python code.",
+      "category": "algorithm",
+      "expected_skill": "explain-algorithms-with-code",
+      "matched_skills": [],
+      "latency_p50_ms": 0.3643999807536602,
+      "latency_p95_ms": 0.4612050077412277,
+      "injected_tokens": 0,
+      "saved_tokens_pct": 100.0
+    },
+    {
+      "id": 14,
+      "query": "Can you break down Kruskal's minimum spanning tree algorithm with code?",
+      "category": "algorithm",
+      "expected_skill": "explain-algorithms-with-code",
+      "matched_skills": [
+        {
+          "name": "explain-algorithms-with-code",
+          "score": 0.1586
+        }
+      ],
+      "latency_p50_ms": 0.375450006686151,
+      "latency_p95_ms": 0.6073950033169239,
+      "injected_tokens": 55,
+      "saved_tokens_pct": 88.32271762208069
+    },
+    {
+      "id": 15,
+      "query": "Explain Trie tree insert and search algorithm with code implementation.",
+      "category": "algorithm",
+      "expected_skill": "explain-algorithms-with-code",
+      "matched_skills": [
+        {
+          "name": "explain-algorithms-with-code",
+          "score": 0.2003
+        }
+      ],
+      "latency_p50_ms": 0.3674000035971403,
+      "latency_p95_ms": 0.4549449949990957,
+      "injected_tokens": 55,
+      "saved_tokens_pct": 88.32271762208069
+    },
+    {
+      "id": 16,
+      "query": "Describe 5G network architecture and its key characteristics.",
+      "category": "concept",
+      "expected_skill": "describe-technical-concepts",
+      "matched_skills": [
+        {
+          "name": "describe-technical-concepts",
+          "score": 0.3456
+        }
+      ],
+      "latency_p50_ms": 0.6277000065892935,
+      "latency_p95_ms": 0.885819987161085,
+      "injected_tokens": 42,
+      "saved_tokens_pct": 91.0828025477707
+    },
+    {
+      "id": 17,
+      "query": "Explain the Prometheus monitoring system architecture and core features.",
+      "category": "concept",
+      "expected_skill": "describe-technical-concepts",
+      "matched_skills": [
+        {
+          "name": "describe-technical-concepts",
+          "score": 0.3174
+        }
+      ],
+      "latency_p50_ms": 0.47199998516589403,
+      "latency_p95_ms": 0.5768400122178717,
+      "injected_tokens": 42,
+      "saved_tokens_pct": 91.0828025477707
+    },
+    {
+      "id": 18,
+      "query": "Describe Apache Kafka distributed event streaming and its main components.",
+      "category": "concept",
+      "expected_skill": "describe-technical-concepts",
+      "matched_skills": [],
+      "latency_p50_ms": 0.4587500006891787,
+      "latency_p95_ms": 0.5724949820432812,
+      "injected_tokens": 0,
+      "saved_tokens_pct": 100.0
+    },
+    {
+      "id": 19,
+      "query": "What is Docker containerization? Describe its key concepts and benefits.",
+      "category": "concept",
+      "expected_skill": "describe-technical-concepts",
+      "matched_skills": [
+        {
+          "name": "describe-technical-concepts",
+          "score": 0.2349
+        }
+      ],
+      "latency_p50_ms": 0.8940499974414706,
+      "latency_p95_ms": 0.9590900095645338,
+      "injected_tokens": 42,
+      "saved_tokens_pct": 91.0828025477707
+    },
+    {
+      "id": 20,
+      "query": "Describe Kubernetes pods and replica sets concept in distributed systems.",
+      "category": "concept",
+      "expected_skill": "describe-technical-concepts",
+      "matched_skills": [],
+      "latency_p50_ms": 0.888700014911592,
+      "latency_p95_ms": 0.9849049878539516,
+      "injected_tokens": 0,
+      "saved_tokens_pct": 100.0
+    },
+    {
+      "id": 21,
+      "query": "Explain what WebSockets are and explain the protocol concept and features.",
+      "category": "concept",
+      "expected_skill": "describe-technical-concepts",
+      "matched_skills": [
+        {
+          "name": "describe-technical-concepts",
+          "score": 0.2174
+        }
+      ],
+      "latency_p50_ms": 0.8924999856390059,
+      "latency_p95_ms": 0.9572249779012053,
+      "injected_tokens": 42,
+      "saved_tokens_pct": 91.0828025477707
+    },
+    {
+      "id": 22,
+      "query": "Describe Raft consensus algorithm concept and leader election mechanism.",
+      "category": "concept",
+      "expected_skill": "describe-technical-concepts",
+      "matched_skills": [],
+      "latency_p50_ms": 0.8860999951139092,
+      "latency_p95_ms": 1.1157449858728796,
+      "injected_tokens": 0,
+      "saved_tokens_pct": 100.0
+    },
+    {
+      "id": 23,
+      "query": "Explain GraphQL vs REST API concept and key architectural differences.",
+      "category": "concept",
+      "expected_skill": "describe-technical-concepts",
+      "matched_skills": [],
+      "latency_p50_ms": 0.884400011273101,
+      "latency_p95_ms": 1.0409149952465668,
+      "injected_tokens": 0,
+      "saved_tokens_pct": 100.0
+    },
+    {
+      "id": 24,
+      "query": "Describe OAuth 2.0 authentication framework and token exchange grant types.",
+      "category": "concept",
+      "expected_skill": "describe-technical-concepts",
+      "matched_skills": [],
+      "latency_p50_ms": 0.853799981996417,
+      "latency_p95_ms": 0.8756600000197068,
+      "injected_tokens": 0,
+      "saved_tokens_pct": 100.0
+    },
+    {
+      "id": 25,
+      "query": "What is Server-Sent Events (SSE)? Describe the technical concept.",
+      "category": "concept",
+      "expected_skill": "describe-technical-concepts",
+      "matched_skills": [
+        {
+          "name": "describe-technical-concepts",
+          "score": 0.2304
+        }
+      ],
+      "latency_p50_ms": 0.8837500063236803,
+      "latency_p95_ms": 1.0221950360573826,
+      "injected_tokens": 42,
+      "saved_tokens_pct": 91.0828025477707
+    },
+    {
+      "id": 26,
+      "query": "Describe the CAP theorem in distributed databases and its trade-offs.",
+      "category": "concept",
+      "expected_skill": "describe-technical-concepts",
+      "matched_skills": [],
+      "latency_p50_ms": 0.3834999806713313,
+      "latency_p95_ms": 0.6289900135016067,
+      "injected_tokens": 0,
+      "saved_tokens_pct": 100.0
+    },
+    {
+      "id": 27,
+      "query": "Explain Redis in-memory cache architecture and persistence modes.",
+      "category": "concept",
+      "expected_skill": "describe-technical-concepts",
+      "matched_skills": [],
+      "latency_p50_ms": 0.443900004029274,
+      "latency_p95_ms": 0.9422549948794766,
+      "injected_tokens": 0,
+      "saved_tokens_pct": 100.0
+    },
+    {
+      "id": 28,
+      "query": "Describe microservices architecture pattern and its key principles.",
+      "category": "concept",
+      "expected_skill": "describe-technical-concepts",
+      "matched_skills": [],
+      "latency_p50_ms": 0.3562999772839248,
+      "latency_p95_ms": 0.4988550470443441,
+      "injected_tokens": 0,
+      "saved_tokens_pct": 100.0
+    },
+    {
+      "id": 29,
+      "query": "Explain zero trust security model architecture and key properties.",
+      "category": "concept",
+      "expected_skill": "describe-technical-concepts",
+      "matched_skills": [],
+      "latency_p50_ms": 0.36429997999221087,
+      "latency_p95_ms": 0.44223998847883184,
+      "injected_tokens": 0,
+      "saved_tokens_pct": 100.0
+    },
+    {
+      "id": 30,
+      "query": "Describe vector databases and how approximate nearest neighbor search works.",
+      "category": "concept",
+      "expected_skill": "describe-technical-concepts",
+      "matched_skills": [],
+      "latency_p50_ms": 0.3600000054575503,
+      "latency_p95_ms": 0.4286650073481723,
+      "injected_tokens": 0,
+      "saved_tokens_pct": 100.0
+    },
+    {
+      "id": 31,
+      "query": "What is the capital of France and what language is spoken there?",
+      "category": "out_of_domain",
+      "expected_skill": null,
+      "matched_skills": [],
+      "latency_p50_ms": 0.6845500029157847,
+      "latency_p95_ms": 1.6216299816733222,
+      "injected_tokens": 0,
+      "saved_tokens_pct": 100.0
+    },
+    {
+      "id": 32,
+      "query": "Give me a simple recipe for baking homemade chocolate chip cookies.",
+      "category": "out_of_domain",
+      "expected_skill": null,
+      "matched_skills": [],
+      "latency_p50_ms": 0.6838500266894698,
+      "latency_p95_ms": 1.8828450061846513,
+      "injected_tokens": 0,
+      "saved_tokens_pct": 100.0
+    },
+    {
+      "id": 33,
+      "query": "Can you recommend three good mystery novels published in 2023?",
+      "category": "out_of_domain",
+      "expected_skill": null,
+      "matched_skills": [],
+      "latency_p50_ms": 0.46439998550340533,
+      "latency_p95_ms": 0.7137599983252584,
+      "injected_tokens": 0,
+      "saved_tokens_pct": 100.0
+    },
+    {
+      "id": 34,
+      "query": "Write a funny joke about a programmer and an espresso machine.",
+      "category": "out_of_domain",
+      "expected_skill": null,
+      "matched_skills": [],
+      "latency_p50_ms": 0.7119500078260899,
+      "latency_p95_ms": 1.3401000149315223,
+      "injected_tokens": 0,
+      "saved_tokens_pct": 100.0
+    },
+    {
+      "id": 35,
+      "query": "What should I pack for a 5-day hiking trip in the Rocky Mountains?",
+      "category": "out_of_domain",
+      "expected_skill": null,
+      "matched_skills": [],
+      "latency_p50_ms": 0.573000026633963,
+      "latency_p95_ms": 1.0884600458666678,
+      "injected_tokens": 0,
+      "saved_tokens_pct": 100.0
+    },
+    {
+      "id": 36,
+      "query": "Explain why the sky is blue using simple physics for kids.",
+      "category": "out_of_domain",
+      "expected_skill": null,
+      "matched_skills": [],
+      "latency_p50_ms": 0.4924499662593007,
+      "latency_p95_ms": 0.6363349879393352,
+      "injected_tokens": 0,
+      "saved_tokens_pct": 100.0
+    },
+    {
+      "id": 37,
+      "query": "How do airplanes generate lift during flight?",
+      "category": "out_of_domain",
+      "expected_skill": null,
+      "matched_skills": [],
+      "latency_p50_ms": 0.3858999989461154,
+      "latency_p95_ms": 0.4616999794961884,
+      "injected_tokens": 0,
+      "saved_tokens_pct": 100.0
+    },
+    {
+      "id": 38,
+      "query": "Draft a polite email asking my manager for time off next Friday.",
+      "category": "out_of_domain",
+      "expected_skill": null,
+      "matched_skills": [],
+      "latency_p50_ms": 0.3789999755099416,
+      "latency_p95_ms": 0.4969300265656784,
+      "injected_tokens": 0,
+      "saved_tokens_pct": 100.0
+    },
+    {
+      "id": 39,
+      "query": "What is the difference between a violin and a viola?",
+      "category": "out_of_domain",
+      "expected_skill": null,
+      "matched_skills": [],
+      "latency_p50_ms": 0.4249500052537769,
+      "latency_p95_ms": 0.6432649941416456,
+      "injected_tokens": 0,
+      "saved_tokens_pct": 100.0
+    },
+    {
+      "id": 40,
+      "query": "Tell me about the history of the Olympic Games in Ancient Greece.",
+      "category": "out_of_domain",
+      "expected_skill": null,
+      "matched_skills": [],
+      "latency_p50_ms": 0.30765001429244876,
+      "latency_p95_ms": 0.5803350184578447,
+      "injected_tokens": 0,
+      "saved_tokens_pct": 100.0
+    }
+  ]
+}

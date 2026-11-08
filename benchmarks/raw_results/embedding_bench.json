@@ -1,0 +1,526 @@
+{
+  "timestamp": "2026-11-08 13:26:06",
+  "model": "models/gemini-embedding-001",
+  "sample_size": 40,
+  "embedding_dimensions": 3072,
+  "latency_stats_ms": {
+    "mean": 871.7056325040176,
+    "median": 525.7665000390261,
+    "p95": 664.5436450286057,
+    "min": 490.2894999831915,
+    "max": 13521.17130003171,
+    "std": 2027.547374523749
+  },
+  "accuracy_with_embeddings": {
+    "cosine_threshold": 0.55,
+    "recall_at_1": 0.9,
+    "recall_at_3": 0.9,
+    "ood_rejection_rate": 0.9
+  },
+  "per_query_details": [
+    {
+      "id": 1,
+      "query": "Can you explain Dijkstra's algorithm and show me how to implement it in Python?",
+      "expected": "explain-algorithms-with-code",
+      "matched": [
+        {
+          "name": "explain-algorithms-with-code",
+          "similarity": 0.6487
+        },
+        {
+          "name": "explain-technologies-with-examples",
+          "similarity": 0.5525
+        }
+      ],
+      "embedding_latency_ms": 540.6129999901168
+    },
+    {
+      "id": 2,
+      "query": "How does merge sort work? Provide code snippets and step by step walk through.",
+      "expected": "explain-algorithms-with-code",
+      "matched": [
+        {
+          "name": "explain-algorithms-with-code",
+          "similarity": 0.6685
+        },
+        {
+          "name": "explain-technologies-with-examples",
+          "similarity": 0.561
+        }
+      ],
+      "embedding_latency_ms": 526.2256000423804
+    },
+    {
+      "id": 3,
+      "query": "Explain binary search tree insertion with sample code.",
+      "expected": "explain-algorithms-with-code",
+      "matched": [
+        {
+          "name": "explain-algorithms-with-code",
+          "similarity": 0.65
+        },
+        {
+          "name": "explain-technologies-with-examples",
+          "similarity": 0.5877
+        }
+      ],
+      "embedding_latency_ms": 542.8456999943592
+    },
+    {
+      "id": 4,
+      "query": "Explain the sliding window algorithm with an example in C++.",
+      "expected": "explain-algorithms-with-code",
+      "matched": [
+        {
+          "name": "explain-algorithms-with-code",
+          "similarity": 0.6366
+        },
+        {
+          "name": "explain-technologies-with-examples",
+          "similarity": 0.5583
+        }
+      ],
+      "embedding_latency_ms": 521.2262000422925
+    },
+    {
+      "id": 5,
+      "query": "Explain dynamic programming memoization with the Fibonacci sequence in code.",
+      "expected": "explain-algorithms-with-code",
+      "matched": [
+        {
+          "name": "explain-algorithms-with-code",
+          "similarity": 0.6591
+        },
+        {
+          "name": "explain-technologies-with-examples",
+          "similarity": 0.5615
+        }
+      ],
+      "embedding_latency_ms": 512.9588000127114
+    },
+    {
+      "id": 6,
+      "query": "How does Kadane's algorithm work for maximum subarray? Give code explanation.",
+      "expected": "explain-algorithms-with-code",
+      "matched": [
+        {
+          "name": "explain-algorithms-with-code",
+          "similarity": 0.6405
+        }
+      ],
+      "embedding_latency_ms": 562.0498000062071
+    },
+    {
+      "id": 7,
+      "query": "Can you explain breadth first search BFS traversal on a graph with code?",
+      "expected": "explain-algorithms-with-code",
+      "matched": [
+        {
+          "name": "explain-algorithms-with-code",
+          "similarity": 0.6528
+        },
+        {
+          "name": "explain-technologies-with-examples",
+          "similarity": 0.5635
+        }
+      ],
+      "embedding_latency_ms": 518.2156999944709
+    },
+    {
+      "id": 8,
+      "query": "Walk me through depth first search DFS recursive algorithm with implementation.",
+      "expected": "explain-algorithms-with-code",
+      "matched": [
+        {
+          "name": "explain-algorithms-with-code",
+          "similarity": 0.6408
+        }
+      ],
+      "embedding_latency_ms": 525.3074000356719
+    },
+    {
+      "id": 9,
+      "query": "Explain quicksort partitioning step by step with code examples.",
+      "expected": "explain-algorithms-with-code",
+      "matched": [
+        {
+          "name": "explain-algorithms-with-code",
+          "similarity": 0.6391
+        },
+        {
+          "name": "explain-technologies-with-examples",
+          "similarity": 0.5623
+        }
+      ],
+      "embedding_latency_ms": 563.8330000219867
+    },
+    {
+      "id": 10,
+      "query": "Show me the two pointer approach for reversing an array with code and explanation.",
+      "expected": "explain-algorithms-with-code",
+      "matched": [
+        {
+          "name": "explain-algorithms-with-code",
+          "similarity": 0.6179
+        }
+      ],
+      "embedding_latency_ms": 544.0351000288501
+    },
+    {
+      "id": 11,
+      "query": "Explain Bellman-Ford shortest path algorithm with code snippets.",
+      "expected": "explain-algorithms-with-code",
+      "matched": [
+        {
+          "name": "explain-algorithms-with-code",
+          "similarity": 0.6721
+        },
+        {
+          "name": "explain-technologies-with-examples",
+          "similarity": 0.5575
+        }
+      ],
+      "embedding_latency_ms": 523.121100035496
+    },
+    {
+      "id": 12,
+      "query": "How does A* search algorithm work? Include step by step process and code.",
+      "expected": "explain-algorithms-with-code",
+      "matched": [
+        {
+          "name": "explain-algorithms-with-code",
+          "similarity": 0.6875
+        },
+        {
+          "name": "explain-technologies-with-examples",
+          "similarity": 0.5585
+        },
+        {
+          "name": "describe-technical-concepts",
+          "similarity": 0.5529
+        }
+      ],
+      "embedding_latency_ms": 531.583399977535
+    },
+    {
+      "id": 13,
+      "query": "Explain Topological Sort on directed acyclic graph with Python code.",
+      "expected": "explain-algorithms-with-code",
+      "matched": [
+        {
+          "name": "explain-algorithms-with-code",
+          "similarity": 0.6203
+        }
+      ],
+      "embedding_latency_ms": 575.8227000478655
+    },
+    {
+      "id": 14,
+      "query": "Can you break down Kruskal's minimum spanning tree algorithm with code?",
+      "expected": "explain-algorithms-with-code",
+      "matched": [
+        {
+          "name": "explain-algorithms-with-code",
+          "similarity": 0.6435
+        }
+      ],
+      "embedding_latency_ms": 544.7654000017792
+    },
+    {
+      "id": 15,
+      "query": "Explain Trie tree insert and search algorithm with code implementation.",
+      "expected": "explain-algorithms-with-code",
+      "matched": [
+        {
+          "name": "explain-algorithms-with-code",
+          "similarity": 0.6863
+        },
+        {
+          "name": "explain-technologies-with-examples",
+          "similarity": 0.5765
+        },
+        {
+          "name": "describe-technical-concepts",
+          "similarity": 0.5565
+        }
+      ],
+      "embedding_latency_ms": 550.7664000033401
+    },
+    {
+      "id": 16,
+      "query": "Describe 5G network architecture and its key characteristics.",
+      "expected": "describe-technical-concepts",
+      "matched": [
+        {
+          "name": "describe-technical-concepts",
+          "similarity": 0.6244
+        },
+        {
+          "name": "explain-technologies-with-examples",
+          "similarity": 0.5582
+        }
+      ],
+      "embedding_latency_ms": 595.1157999807037
+    },
+    {
+      "id": 17,
+      "query": "Explain the Prometheus monitoring system architecture and core features.",
+      "expected": "describe-technical-concepts",
+      "matched": [
+        {
+          "name": "describe-technical-concepts",
+          "similarity": 0.598
+        },
+        {
+          "name": "explain-technologies-with-examples",
+          "similarity": 0.5529
+        }
+      ],
+      "embedding_latency_ms": 581.4342999947257
+    },
+    {
+      "id": 18,
+      "query": "Describe Apache Kafka distributed event streaming and its main components.",
+      "expected": "describe-technical-concepts",
+      "matched": [
+        {
+          "name": "describe-technical-concepts",
+          "similarity": 0.5657
+        }
+      ],
+      "embedding_latency_ms": 518.6721999780275
+    },
+    {
+      "id": 19,
+      "query": "What is Docker containerization? Describe its key concepts and benefits.",
+      "expected": "describe-technical-concepts",
+      "matched": [
+        {
+          "name": "describe-technical-concepts",
+          "similarity": 0.6132
+        }
+      ],
+      "embedding_latency_ms": 545.624999969732
+    },
+    {
+      "id": 20,
+      "query": "Describe Kubernetes pods and replica sets concept in distributed systems.",
+      "expected": "describe-technical-concepts",
+      "matched": [
+        {
+          "name": "describe-technical-concepts",
+          "similarity": 0.576
+        }
+      ],
+      "embedding_latency_ms": 527.0374999963678
+    },
+    {
+      "id": 21,
+      "query": "Explain what WebSockets are and explain the protocol concept and features.",
+      "expected": "describe-technical-concepts",
+      "matched": [
+        {
+          "name": "describe-technical-concepts",
+          "similarity": 0.6377
+        },
+        {
+          "name": "explain-technologies-with-examples",
+          "similarity": 0.5942
+        }
+      ],
+      "embedding_latency_ms": 516.4191999938339
+    },
+    {
+      "id": 22,
+      "query": "Describe Raft consensus algorithm concept and leader election mechanism.",
+      "expected": "describe-technical-concepts",
+      "matched": [
+        {
+          "name": "describe-technical-concepts",
+          "similarity": 0.5826
+        },
+        {
+          "name": "explain-algorithms-with-code",
+          "similarity": 0.5536
+        }
+      ],
+      "embedding_latency_ms": 510.3544000303373
+    },
+    {
+      "id": 23,
+      "query": "Explain GraphQL vs REST API concept and key architectural differences.",
+      "expected": "describe-technical-concepts",
+      "matched": [
+        {
+          "name": "describe-technical-concepts",
+          "similarity": 0.5808
+        }
+      ],
+      "embedding_latency_ms": 496.1617999942973
+    },
+    {
+      "id": 24,
+      "query": "Describe OAuth 2.0 authentication framework and token exchange grant types.",
+      "expected": "describe-technical-concepts",
+      "matched": [],
+      "embedding_latency_ms": 511.77730003837496
+    },
+    {
+      "id": 25,
+      "query": "What is Server-Sent Events (SSE)? Describe the technical concept.",
+      "expected": "describe-technical-concepts",
+      "matched": [
+        {
+          "name": "describe-technical-concepts",
+          "similarity": 0.6457
+        },
+        {
+          "name": "explain-technologies-with-examples",
+          "similarity": 0.58
+        }
+      ],
+      "embedding_latency_ms": 509.186299983412
+    },
+    {
+      "id": 26,
+      "query": "Describe the CAP theorem in distributed databases and its trade-offs.",
+      "expected": "describe-technical-concepts",
+      "matched": [],
+      "embedding_latency_ms": 642.5171000300907
+    },
+    {
+      "id": 27,
+      "query": "Explain Redis in-memory cache architecture and persistence modes.",
+      "expected": "describe-technical-concepts",
+      "matched": [],
+      "embedding_latency_ms": 505.9618999948725
+    },
+    {
+      "id": 28,
+      "query": "Describe microservices architecture pattern and its key principles.",
+      "expected": "describe-technical-concepts",
+      "matched": [
+        {
+          "name": "describe-technical-concepts",
+          "similarity": 0.5921
+        },
+        {
+          "name": "explain-technologies-with-examples",
+          "similarity": 0.5668
+        }
+      ],
+      "embedding_latency_ms": 523.7735999980941
+    },
+    {
+      "id": 29,
+      "query": "Explain zero trust security model architecture and key properties.",
+      "expected": "describe-technical-concepts",
+      "matched": [
+        {
+          "name": "describe-technical-concepts",
+          "similarity": 0.5845
+        },
+        {
+          "name": "explain-technologies-with-examples",
+          "similarity": 0.57
+        }
+      ],
+      "embedding_latency_ms": 522.7452000253834
+    },
+    {
+      "id": 30,
+      "query": "Describe vector databases and how approximate nearest neighbor search works.",
+      "expected": "describe-technical-concepts",
+      "matched": [
+        {
+          "name": "describe-technical-concepts",
+          "similarity": 0.5941
+        },
+        {
+          "name": "explain-technologies-with-examples",
+          "similarity": 0.5618
+        },
+        {
+          "name": "explain-algorithms-with-code",
+          "similarity": 0.5572
+        }
+      ],
+      "embedding_latency_ms": 1083.0480000004172
+    },
+    {
+      "id": 31,
+      "query": "What is the capital of France and what language is spoken there?",
+      "expected": null,
+      "matched": [],
+      "embedding_latency_ms": 516.8234999873675
+    },
+    {
+      "id": 32,
+      "query": "Give me a simple recipe for baking homemade chocolate chip cookies.",
+      "expected": null,
+      "matched": [],
+      "embedding_latency_ms": 529.7962999902666
+    },
+    {
+      "id": 33,
+      "query": "Can you recommend three good mystery novels published in 2023?",
+      "expected": null,
+      "matched": [],
+      "embedding_latency_ms": 13521.17130003171
+    },
+    {
+      "id": 34,
+      "query": "Write a funny joke about a programmer and an espresso machine.",
+      "expected": null,
+      "matched": [],
+      "embedding_latency_ms": 541.630299994722
+    },
+    {
+      "id": 35,
+      "query": "What should I pack for a 5-day hiking trip in the Rocky Mountains?",
+      "expected": null,
+      "matched": [],
+      "embedding_latency_ms": 519.0311999758705
+    },
+    {
+      "id": 36,
+      "query": "Explain why the sky is blue using simple physics for kids.",
+      "expected": null,
+      "matched": [
+        {
+          "name": "explain-technologies-with-examples",
+          "similarity": 0.5528
+        }
+      ],
+      "embedding_latency_ms": 519.5665000355802
+    },
+    {
+      "id": 37,
+      "query": "How do airplanes generate lift during flight?",
+      "expected": null,
+      "matched": [],
+      "embedding_latency_ms": 510.70779998553917
+    },
+    {
+      "id": 38,
+      "query": "Draft a polite email asking my manager for time off next Friday.",
+      "expected": null,
+      "matched": [],
+      "embedding_latency_ms": 508.8579999865033
+    },
+    {
+      "id": 39,
+      "query": "What is the difference between a violin and a viola?",
+      "expected": null,
+      "matched": [],
+      "embedding_latency_ms": 537.151999946218
+    },
+    {
+      "id": 40,
+      "query": "Tell me about the history of the Olympic Games in Ancient Greece.",
+      "expected": null,
+      "matched": [],
+      "embedding_latency_ms": 490.2894999831915
+    }
+  ]
+}

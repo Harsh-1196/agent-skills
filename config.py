@@ -9,7 +9,7 @@ EMBEDDING_MODEL = "models/gemini-embedding-001"
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 # Groq Configuration (Observer + Clustering)
-OBSERVER_MODEL = "llama-3.3-70b-versatile"
+OBSERVER_MODEL = os.getenv("OBSERVER_MODEL", "openai/gpt-oss-20b")
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 # Backwards compatibility

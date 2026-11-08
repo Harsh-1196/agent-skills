@@ -1,0 +1,242 @@
+[
+  {
+    "id": 1,
+    "query": "Can you explain Dijkstra's algorithm and show me how to implement it in Python?",
+    "expected_skill": "explain-algorithms-with-code",
+    "category": "algorithm"
+  },
+  {
+    "id": 2,
+    "query": "How does merge sort work? Provide code snippets and step by step walk through.",
+    "expected_skill": "explain-algorithms-with-code",
+    "category": "algorithm"
+  },
+  {
+    "id": 3,
+    "query": "Explain binary search tree insertion with sample code.",
+    "expected_skill": "explain-algorithms-with-code",
+    "category": "algorithm"
+  },
+  {
+    "id": 4,
+    "query": "Explain the sliding window algorithm with an example in C++.",
+    "expected_skill": "explain-algorithms-with-code",
+    "category": "algorithm"
+  },
+  {
+    "id": 5,
+    "query": "Explain dynamic programming memoization with the Fibonacci sequence in code.",
+    "expected_skill": "explain-algorithms-with-code",
+    "category": "algorithm"
+  },
+  {
+    "id": 6,
+    "query": "How does Kadane's algorithm work for maximum subarray? Give code explanation.",
+    "expected_skill": "explain-algorithms-with-code",
+    "category": "algorithm"
+  },
+  {
+    "id": 7,
+    "query": "Can you explain breadth first search BFS traversal on a graph with code?",
+    "expected_skill": "explain-algorithms-with-code",
+    "category": "algorithm"
+  },
+  {
+    "id": 8,
+    "query": "Walk me through depth first search DFS recursive algorithm with implementation.",
+    "expected_skill": "explain-algorithms-with-code",
+    "category": "algorithm"
+  },
+  {
+    "id": 9,
+    "query": "Explain quicksort partitioning step by step with code examples.",
+    "expected_skill": "explain-algorithms-with-code",
+    "category": "algorithm"
+  },
+  {
+    "id": 10,
+    "query": "Show me the two pointer approach for reversing an array with code and explanation.",
+    "expected_skill": "explain-algorithms-with-code",
+    "category": "algorithm"
+  },
+  {
+    "id": 11,
+    "query": "Explain Bellman-Ford shortest path algorithm with code snippets.",
+    "expected_skill": "explain-algorithms-with-code",
+    "category": "algorithm"
+  },
+  {
+    "id": 12,
+    "query": "How does A* search algorithm work? Include step by step process and code.",
+    "expected_skill": "explain-algorithms-with-code",
+    "category": "algorithm"
+  },
+  {
+    "id": 13,
+    "query": "Explain Topological Sort on directed acyclic graph with Python code.",
+    "expected_skill": "explain-algorithms-with-code",
+    "category": "algorithm"
+  },
+  {
+    "id": 14,
+    "query": "Can you break down Kruskal's minimum spanning tree algorithm with code?",
+    "expected_skill": "explain-algorithms-with-code",
+    "category": "algorithm"
+  },
+  {
+    "id": 15,
+    "query": "Explain Trie tree insert and search algorithm with code implementation.",
+    "expected_skill": "explain-algorithms-with-code",
+    "category": "algorithm"
+  },
+  {
+    "id": 16,
+    "query": "Describe 5G network architecture and its key characteristics.",
+    "expected_skill": "describe-technical-concepts",
+    "category": "concept"
+  },
+  {
+    "id": 17,
+    "query": "Explain the Prometheus monitoring system architecture and core features.",
+    "expected_skill": "describe-technical-concepts",
+    "category": "concept"
+  },
+  {
+    "id": 18,
+    "query": "Describe Apache Kafka distributed event streaming and its main components.",
+    "expected_skill": "describe-technical-concepts",
+    "category": "concept"
+  },
+  {
+    "id": 19,
+    "query": "What is Docker containerization? Describe its key concepts and benefits.",
+    "expected_skill": "describe-technical-concepts",
+    "category": "concept"
+  },
+  {
+    "id": 20,
+    "query": "Describe Kubernetes pods and replica sets concept in distributed systems.",
+    "expected_skill": "describe-technical-concepts",
+    "category": "concept"
+  },
+  {
+    "id": 21,
+    "query": "Explain what WebSockets are and explain the protocol concept and features.",
+    "expected_skill": "describe-technical-concepts",
+    "category": "concept"
+  },
+  {
+    "id": 22,
+    "query": "Describe Raft consensus algorithm concept and leader election mechanism.",
+    "expected_skill": "describe-technical-concepts",
+    "category": "concept"
+  },
+  {
+    "id": 23,
+    "query": "Explain GraphQL vs REST API concept and key architectural differences.",
+    "expected_skill": "describe-technical-concepts",
+    "category": "concept"
+  },
+  {
+    "id": 24,
+    "query": "Describe OAuth 2.0 authentication framework and token exchange grant types.",
+    "expected_skill": "describe-technical-concepts",
+    "category": "concept"
+  },
+  {
+    "id": 25,
+    "query": "What is Server-Sent Events (SSE)? Describe the technical concept.",
+    "expected_skill": "describe-technical-concepts",
+    "category": "concept"
+  },
+  {
+    "id": 26,
+    "query": "Describe the CAP theorem in distributed databases and its trade-offs.",
+    "expected_skill": "describe-technical-concepts",
+    "category": "concept"
+  },
+  {
+    "id": 27,
+    "query": "Explain Redis in-memory cache architecture and persistence modes.",
+    "expected_skill": "describe-technical-concepts",
+    "category": "concept"
+  },
+  {
+    "id": 28,
+    "query": "Describe microservices architecture pattern and its key principles.",
+    "expected_skill": "describe-technical-concepts",
+    "category": "concept"
+  },
+  {
+    "id": 29,
+    "query": "Explain zero trust security model architecture and key properties.",
+    "expected_skill": "describe-technical-concepts",
+    "category": "concept"
+  },
+  {
+    "id": 30,
+    "query": "Describe vector databases and how approximate nearest neighbor search works.",
+    "expected_skill": "describe-technical-concepts",
+    "category": "concept"
+  },
+  {
+    "id": 31,
+    "query": "What is the capital of France and what language is spoken there?",
+    "expected_skill": null,
+    "category": "out_of_domain"
+  },
+  {
+    "id": 32,
+    "query": "Give me a simple recipe for baking homemade chocolate chip cookies.",
+    "expected_skill": null,
+    "category": "out_of_domain"
+  },
+  {
+    "id": 33,
+    "query": "Can you recommend three good mystery novels published in 2023?",
+    "expected_skill": null,
+    "category": "out_of_domain"
+  },
+  {
+    "id": 34,
+    "query": "Write a funny joke about a programmer and an espresso machine.",
+    "expected_skill": null,
+    "category": "out_of_domain"
+  },
+  {
+    "id": 35,
+    "query": "What should I pack for a 5-day hiking trip in the Rocky Mountains?",
+    "expected_skill": null,
+    "category": "out_of_domain"
+  },
+  {
+    "id": 36,
+    "query": "Explain why the sky is blue using simple physics for kids.",
+    "expected_skill": null,
+    "category": "out_of_domain"
+  },
+  {
+    "id": 37,
+    "query": "How do airplanes generate lift during flight?",
+    "expected_skill": null,
+    "category": "out_of_domain"
+  },
+  {
+    "id": 38,
+    "query": "Draft a polite email asking my manager for time off next Friday.",
+    "expected_skill": null,
+    "category": "out_of_domain"
+  },
+  {
+    "id": 39,
+    "query": "What is the difference between a violin and a viola?",
+    "expected_skill": null,
+    "category": "out_of_domain"
+  },
+  {
+    "id": 40,
+    "query": "Tell me about the history of the Olympic Games in Ancient Greece.",
+    "expected_skill": null,
+    "category": "out_of_domain"
+  }
+]
